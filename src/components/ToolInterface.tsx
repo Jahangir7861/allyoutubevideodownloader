@@ -378,7 +378,21 @@ export default function ToolInterface({ tool }: Props) {
               <div className="space-y-2.5 max-h-80 overflow-y-auto pr-1">
                 {(activeTab === 'video' ? result.videos : result.audios)?.length > 0 ? (
                   (activeTab === 'video' ? result.videos : result.audios).map((item: any, idx: number) => {
-                    const isHD = /1080|1440|2160|4k/i.test(item.quality);
+                    const is4K = /4k|2160|4320|8k/i.test(item.quality);
+                    const is2K = /2k|1440/i.test(item.quality);
+                    const is1080 = /1080/i.test(item.quality);
+                    const is720 = /720/i.test(item.quality);
+
+                    const badgeClass = is4K
+                      ? 'bg-gradient-to-r from-purple-500/30 to-pink-500/30 text-pink-300 border border-pink-500/40 shadow-sm shadow-pink-500/10 font-extrabold'
+                      : is2K
+                      ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/35 font-bold'
+                      : is1080
+                      ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 font-bold'
+                      : is720
+                      ? 'bg-blue-500/20 text-blue-300 border border-blue-500/25 font-semibold'
+                      : 'bg-white/10 text-white border border-white/10';
+
                     return (
                       <div
                         key={idx}
@@ -386,12 +400,9 @@ export default function ToolInterface({ tool }: Props) {
                       >
                         <div className="flex items-center gap-2.5">
                           <span
-                            className={`px-2.5 py-1 rounded-lg text-xs font-bold font-syne ${
-                              isHD
-                                ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30'
-                                : 'bg-white/10 text-white'
-                            }`}
+                            className={`px-2.5 py-1 rounded-lg text-xs font-syne flex items-center gap-1 ${badgeClass}`}
                           >
+                            {is4K && <Sparkles className="w-3 h-3 text-pink-400 shrink-0" />}
                             {item.quality}
                           </span>
                           <span className="text-xs font-semibold text-zinc-400 uppercase tracking-wider">
