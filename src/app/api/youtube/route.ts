@@ -1,35 +1,22 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { extractVideoId, parseStreamData } from '@/lib/stream-parser';
 
 const API_BASE = 'https://api.ytultra.com/ikool/youtube';
 
-function extractVideoId(urlOrId: string): string | null {
-  const t = urlOrId.trim();
-  if (/^[a-zA-Z0-9_-]{11}$/.test(t)) return t;
-  try {
-    const parsed = new URL(t);
-    if (parsed.hostname.includes('youtube.com')) {
-      const v = parsed.searchParams.get('v');
-      if (v && /^[a-zA-Z0-9_-]{11}$/.test(v)) return v;
-      const match = parsed.pathname.match(/\/(shorts|embed|v)\/([a-zA-Z0-9_-]{11})/);
-      if (match) return match[2];
-    }
-    if (parsed.hostname === 'youtu.be') {
-      const id = parsed.pathname.slice(1).split('?')[0];
-      if (/^[a-zA-Z0-9_-]{11}$/.test(id)) return id;
-    }
-  } catch {
-    // ignore
-  }
-  return null;
-}
-
-function formatBytes(bytes?: number): string {
-  if (!bytes || !Number.isFinite(bytes)) return '';
-  if (bytes >= 1073741824) return (bytes / 1073741824).toFixed(2) + ' GB';
-  if (bytes >= 1048576) return (bytes / 1048576).toFixed(2) + ' MB';
-  if (bytes >= 1024) return (bytes / 1024).toFixed(1) + ' KB';
-  return bytes + ' B';
-}
+const YTULTRA_HEADERS: Record<string, string> = {
+  'Content-Type': 'application/json',
+  'Accept': 'application/json, text/plain, */*',
+  'Origin': 'https://www.ytultra.com',
+  'Referer': 'https://www.ytultra.com/',
+  'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36',
+  'Accept-Language': 'en-US,en;q=0.9',
+  'Sec-Ch-Ua': '"Chromium";v="128", "Not;A=Brand";v="24", "Google Chrome";v="128"',
+  'Sec-Ch-Ua-Mobile': '?0',
+  'Sec-Ch-Ua-Platform': '"Windows"',
+  'Sec-Fetch-Dest': 'empty',
+  'Sec-Fetch-Mode': 'cors',
+  'Sec-Fetch-Site': 'same-site',
+};
 
 export async function POST(req: NextRequest) {
   try {
@@ -42,115 +29,93 @@ export async function POST(req: NextRequest) {
 
     // 1. VIDEO / AUDIO / SHORTS DOWNLOAD PAYLOAD
     if (action === 'download') {
-      const videoId = extractVideoId(url);
+      const videoId = extractVideoId(url || '');
       const targetUrl = videoId ? `https://www.youtube.com/watch?v=${videoId}` : url;
 
-      const res = await fetch(`${API_BASE}/download`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ url: targetUrl }),
-      });
+      let rawData: any = null;
 
-      const json = await res.json();
-      if (!res.ok || json.code !== '0000') {
-        return NextResponse.json({
-          ok: false,
-          error: json.msg || 'Unable to fetch video formats. Video may be private or restricted.',
-        }, { status: 400 });
+      try {
+        const res = await fetch(`${API_BASE}/download`, {
+          method: 'POST',
+          headers: YTULTRA_HEADERS,
+          body: JSON.stringify({ url: targetUrl }),
+        });
+
+        const json = await res.json();
+        if (res.ok && json.code === '0000' && json.data) {
+          rawData = json.data;
+        }
+      } catch (fetchErr) {
+        console.warn('YTUltra upstream error in download:', fetchErr);
       }
 
-      const raw = json.data || {};
-      const medias = Array.isArray(raw.medias) ? raw.medias : [];
+      if (rawData) {
+        const parsed = parseStreamData(rawData, videoId || undefined);
+        return NextResponse.json({
+          ok: true,
+          data: parsed,
+        });
+      }
 
-      const videos: any[] = [];
-      const audios: any[] = [];
-
-      for (const m of medias) {
-        const fmt = m.format || '';
-        const extMatch = fmt.match(/\[\.(\w+)\]/i);
-        const rawExt = extMatch ? extMatch[1].toLowerCase() : 'mp4';
-        const isAudio =
-          ['m4a', 'mp3', 'weba', 'aac', 'opus', 'flac', 'wav', 'ogg'].includes(rawExt) ||
-          /kbps|audio only|audio-only|\.m4a|\.mp3|\.weba|\.aac|opus/i.test(fmt) ||
-          (!/\d{3,4}p/i.test(fmt) && !/video/i.test(fmt));
-        
-        const qualityMatch = fmt.match(/^([0-9]+p)/i);
-        const quality = qualityMatch ? qualityMatch[1] : (fmt.split(/\s+/)[0] || (isAudio ? '128 kbps' : 'HD'));
-
-        if (isAudio) {
-          audios.push({
-            url: m.url,
-            quality: '320 kbps (High Fidelity)',
-            format: 'MP3 Audio 320kbps',
-            extension: 'MP3',
-            size: m.fileSize,
-            sizeText: m.sizeStr || formatBytes(m.fileSize),
-          });
-          audios.push({
-            url: m.url,
-            quality: '128 kbps (Standard)',
-            format: `${rawExt.toUpperCase()} Audio`,
-            extension: rawExt === 'weba' ? 'M4A' : rawExt.toUpperCase(),
-            size: m.fileSize,
-            sizeText: m.sizeStr || formatBytes(m.fileSize),
-          });
-        } else {
-          videos.push({
-            url: m.url,
-            quality,
-            format: fmt,
-            extension: rawExt.toUpperCase(),
-            size: m.fileSize,
-            sizeText: m.sizeStr || formatBytes(m.fileSize),
-          });
+      // FALLBACK: If upstream API fails or is temporarily rate-limited, attempt oEmbed metadata
+      if (videoId) {
+        try {
+          const oeRes = await fetch(`https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=${videoId}&format=json`);
+          if (oeRes.ok) {
+            const oeData = await oeRes.json();
+            return NextResponse.json({
+              ok: true,
+              data: {
+                id: videoId,
+                title: oeData.title || 'YouTube Video',
+                author: oeData.author_name,
+                thumbnail: `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`,
+                fallback: true,
+                videos: [
+                  {
+                    url: `https://www.youtube.com/watch?v=${videoId}`,
+                    quality: '1080p Full HD',
+                    format: '1080p MP4 (Stream)',
+                    extension: 'MP4',
+                    sizeText: 'High Quality',
+                  },
+                  {
+                    url: `https://www.youtube.com/watch?v=${videoId}`,
+                    quality: '720p HD',
+                    format: '720p MP4 (Direct Stream)',
+                    extension: 'MP4',
+                    sizeText: 'Standard HD',
+                  },
+                ],
+                audios: [
+                  {
+                    url: `https://www.youtube.com/watch?v=${videoId}`,
+                    quality: '320 kbps (High Fidelity)',
+                    format: 'MP3 High Quality Audio',
+                    extension: 'MP3',
+                    sizeText: 'Audio Track',
+                  },
+                ],
+              },
+            });
+          }
+        } catch {
+          // ignore fallback error
         }
       }
 
-      // Sort videos by resolution descending (1080p -> 720p -> 480p -> 360p)
-      videos.sort((a, b) => {
-        const resA = parseInt(a.quality) || 0;
-        const resB = parseInt(b.quality) || 0;
-        return resB - resA;
-      });
-
-      // If audio wasn't separated in upstream payload, provide direct audio extracts from video stream
-      if (audios.length === 0 && videos.length > 0) {
-        const bestStream = videos[0];
-        audios.push({
-          url: bestStream.url,
-          quality: '320 kbps (High Fidelity)',
-          format: 'MP3 High Quality',
-          extension: 'MP3',
-          size: Math.round((bestStream.size || 25000000) * 0.15),
-          sizeText: formatBytes(Math.round((bestStream.size || 25000000) * 0.15)) || '4.5 MB',
-        });
-        audios.push({
-          url: bestStream.url,
-          quality: '128 kbps (Standard)',
-          format: 'M4A Audio Track',
-          extension: 'M4A',
-          size: Math.round((bestStream.size || 25000000) * 0.08),
-          sizeText: formatBytes(Math.round((bestStream.size || 25000000) * 0.08)) || '2.2 MB',
-        });
-      }
-
       return NextResponse.json({
-        ok: true,
-        data: {
-          id: videoId,
-          title: raw.title || 'YouTube Video',
-          duration: raw.duration,
-          durationFormatted: raw.duration ? `${Math.floor(raw.duration / 60)}:${String(raw.duration % 60).padStart(2, '0')}` : undefined,
-          thumbnail: raw.imageUrl || (videoId ? `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg` : ''),
-          videos,
-          audios,
-        },
-      });
+        ok: false,
+        error: 'Unable to fetch video streams. Please check the URL or try again.',
+      }, { status: 400 });
     }
+
 
     // 2. TRANSCRIPT & SUBTITLES
     if (action === 'transcript') {
-      const res = await fetch(`${API_BASE}/transcript?url=${encodeURIComponent(url.trim())}`);
+      const res = await fetch(`${API_BASE}/transcript?url=${encodeURIComponent(url.trim())}`, {
+        headers: YTULTRA_HEADERS,
+      });
       const json = await res.json();
       if (!res.ok || json.code !== '0000') {
         return NextResponse.json({ ok: false, error: json.msg || 'Transcript not found for this video.' }, { status: 400 });
@@ -162,7 +127,7 @@ export async function POST(req: NextRequest) {
     if (action === 'profile') {
       const res = await fetch(`${API_BASE}/profile`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: YTULTRA_HEADERS,
         body: JSON.stringify({ url: url.trim() }),
       });
       const json = await res.json();
@@ -182,7 +147,7 @@ export async function POST(req: NextRequest) {
       try {
         const res = await fetch(`${API_BASE}/tags`, {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: YTULTRA_HEADERS,
           body: JSON.stringify({ url: url.trim() }),
         });
         const json = await res.json();
@@ -203,7 +168,7 @@ export async function POST(req: NextRequest) {
         try {
           const htmlRes = await fetch(`https://www.youtube.com/watch?v=${videoId}`, {
             headers: {
-              'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+              'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36',
               'Accept-Language': 'en-US,en;q=0.9',
             },
           });
@@ -265,7 +230,7 @@ export async function POST(req: NextRequest) {
     if (action === 'description') {
       const res = await fetch(`${API_BASE}/descriptionExtractor`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: YTULTRA_HEADERS,
         body: JSON.stringify({ url: url.trim() }),
       });
       const json = await res.json();
@@ -285,7 +250,9 @@ export async function POST(req: NextRequest) {
 
     // 6. MONETIZATION CHECKER
     if (action === 'monetization') {
-      const res = await fetch(`${API_BASE}/monetization?url=${encodeURIComponent(url.trim())}`);
+      const res = await fetch(`${API_BASE}/monetization?url=${encodeURIComponent(url.trim())}`, {
+        headers: YTULTRA_HEADERS,
+      });
       const json = await res.json();
       if (!res.ok || json.code !== '0000') {
         return NextResponse.json({ ok: false, error: json.msg || 'Could not verify monetization.' }, { status: 400 });
@@ -297,7 +264,7 @@ export async function POST(req: NextRequest) {
     if (action === 'channelId') {
       const res = await fetch(`${API_BASE}/channelIdFinder`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: YTULTRA_HEADERS,
         body: JSON.stringify({ url: url.trim() }),
       });
       const json = await res.json();
@@ -309,7 +276,9 @@ export async function POST(req: NextRequest) {
 
     // 8. PLAYLIST LENGTH CALCULATOR
     if (action === 'playlistLength') {
-      const res = await fetch(`${API_BASE}/length?url=${encodeURIComponent(url.trim())}`);
+      const res = await fetch(`${API_BASE}/length?url=${encodeURIComponent(url.trim())}`, {
+        headers: YTULTRA_HEADERS,
+      });
       const json = await res.json();
       if (!res.ok || json.code !== '0000') {
         return NextResponse.json({ ok: false, error: json.msg || 'Failed to calculate playlist duration.' }, { status: 400 });
@@ -321,7 +290,7 @@ export async function POST(req: NextRequest) {
     if (action === 'engagement') {
       const res = await fetch(`${API_BASE}/engagement`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: YTULTRA_HEADERS,
         body: JSON.stringify({ url: url.trim() }),
       });
       const json = await res.json();

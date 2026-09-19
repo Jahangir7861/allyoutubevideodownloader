@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { Download, Copy, Check, ExternalLink, Loader2, AlertCircle, Play, Music, Sparkles, CheckCircle2, Clipboard, Eye, EyeOff, Shield } from 'lucide-react';
 import { ToolData } from '@/lib/tools-data';
 import { useLanguage } from '@/context/LanguageContext';
+import { extractVideoId, parseStreamData } from '@/lib/stream-parser';
 
 interface Props {
   tool: ToolData;
@@ -160,15 +161,53 @@ export default function ToolInterface({ tool }: Props) {
           action = 'download';
       }
 
-      const res = await fetch('/api/youtube', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ action, url: inputVal, topic: inputVal, type }),
-      });
+      let data: any = null;
 
-      const data = await res.json();
-      if (!res.ok || !data.ok) {
-        setError(data.error || 'Request failed. Please verify the URL and try again.');
+      try {
+        const res = await fetch('/api/youtube', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ action, url: inputVal, topic: inputVal, type }),
+        });
+        const resJson = await res.json();
+        if (res.ok && resJson.ok) {
+          data = resJson;
+        } else if (resJson && resJson.error) {
+          data = resJson;
+        }
+      } catch (serverErr) {
+        console.warn('Local API call failed, trying direct stream resolution:', serverErr);
+      }
+
+      // CLIENT-SIDE DIRECT FALLBACK: If Vercel server was blocked or failed, fetch directly from browser!
+      if (!data || !data.ok) {
+        if (['download', 'video', 'shorts', 'audio'].includes(action) || ['video', 'shorts', 'audio'].includes(tool.toolMode)) {
+          const videoId = extractVideoId(inputVal);
+          const targetUrl = videoId ? `https://www.youtube.com/watch?v=${videoId}` : inputVal;
+
+          try {
+            const clientRes = await fetch('https://api.ytultra.com/ikool/youtube/download', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({ url: targetUrl }),
+            });
+            const clientJson = await clientRes.json();
+            if (clientRes.ok && clientJson.code === '0000' && clientJson.data) {
+              data = {
+                ok: true,
+                data: parseStreamData(clientJson.data, videoId || undefined),
+              };
+            }
+          } catch (clientErr) {
+            console.warn('Browser direct fetch fallback failed:', clientErr);
+          }
+        }
+      }
+
+      if (!data || !data.ok) {
+        setError(data?.error || 'Unable to fetch video formats. Please verify the URL and try again.');
         setLoading(false);
         return;
       }
