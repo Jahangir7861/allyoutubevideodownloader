@@ -425,11 +425,11 @@ export default function ToolInterface({ tool }: Props) {
                             )}
                           </button>
 
-                          {/* Direct File Download */}
+                          {/* Direct Streaming Download */}
                           <a
-                            href={`/api/proxy-download?url=${encodeURIComponent(item.url)}&title=${encodeURIComponent(
-                              result.title || 'video'
-                            )}&ext=${item.extension.toLowerCase()}`}
+                            href={item.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
                             download={`${(result.title || 'video').replace(/[^a-zA-Z0-9_\-\s]/g, '').trim().slice(0, 60)}.${item.extension.toLowerCase()}`}
                             className="px-4 py-2 bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-500 hover:to-rose-500 text-white text-xs font-semibold rounded-xl flex items-center gap-1.5 shadow-md shadow-red-500/20 transition-all hover:scale-[1.02] active:scale-[0.98]"
                           >
@@ -445,11 +445,11 @@ export default function ToolInterface({ tool }: Props) {
                 )}
               </div>
 
-              {/* Direct File Download Note */}
+              {/* Direct CDN Stream Fast Download Note */}
               <div className="mt-3.5 p-3 rounded-xl bg-white/[0.03] border border-white/10 flex items-start gap-2.5 text-xs text-zinc-400">
-                <span className="text-emerald-400 font-bold shrink-0 mt-0.5">✓ Instant Download:</span>
+                <span className="text-amber-400 font-bold shrink-0 mt-0.5">⚡ Fast Download:</span>
                 <span className="leading-relaxed">
-                  Clicking <strong>Download</strong> will automatically start downloading the file directly to your device storage.
+                  Downloads stream directly from YouTube's CDN at full speed with <strong>no size limits or cutoffs</strong>. If the stream opens in your browser player, press <kbd className="px-1.5 py-0.5 rounded bg-white/10 text-white font-mono text-[10px]">Ctrl + S</kbd> or tap the player menu (⋮) &rarr; <strong>Download</strong> to save the complete video file.
                 </span>
               </div>
             </div>
@@ -480,7 +480,9 @@ export default function ToolInterface({ tool }: Props) {
                           <div className="text-[11px] text-zinc-500">{item.dimensions}</div>
                         </div>
                         <a
-                          href={`/api/proxy-download?url=${encodeURIComponent(thumbUrl)}&title=${encodeURIComponent(`thumbnail-${result.videoId}-${item.quality}`)}&ext=jpg`}
+                          href={thumbUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
                           download={`thumbnail-${result.videoId}-${item.quality}.jpg`}
                           className="px-3.5 py-1.5 bg-red-500 hover:bg-red-400 text-white text-xs font-semibold rounded-lg flex items-center gap-1 transition-colors"
                         >
@@ -515,7 +517,9 @@ export default function ToolInterface({ tool }: Props) {
                 <div className="flex items-center justify-between p-3.5 rounded-xl bg-white/[0.03] border border-white/10">
                   <span className="text-sm text-zinc-200">Full Resolution Profile Avatar (1280px)</span>
                   <a
-                    href={`/api/proxy-download?url=${encodeURIComponent(result.profileUrl)}&title=channel-avatar&ext=jpg`}
+                    href={result.profileUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     download="channel-avatar.jpg"
                     className="px-4 py-2 bg-red-500 hover:bg-red-400 text-white text-xs font-semibold rounded-xl flex items-center gap-1.5 shadow-md shadow-red-500/20"
                   >
@@ -533,7 +537,9 @@ export default function ToolInterface({ tool }: Props) {
                   />
                   <div className="flex justify-end">
                     <a
-                      href={`/api/proxy-download?url=${encodeURIComponent(result.logoUrl)}&title=channel-banner&ext=jpg`}
+                      href={result.logoUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       download="channel-banner.jpg"
                       className="px-4 py-2 bg-red-500 hover:bg-red-400 text-white text-xs font-semibold rounded-xl flex items-center gap-1.5 shadow-md shadow-red-500/20"
                     >
