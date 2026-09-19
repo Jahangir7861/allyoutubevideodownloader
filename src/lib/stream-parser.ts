@@ -46,47 +46,69 @@ export function getResolutionRank(quality: string): number {
 }
 
 export function parseStreamData(raw: any, videoId?: string) {
+  if (!raw) {
+    return {
+      id: videoId,
+      title: 'YouTube Video',
+      thumbnail: videoId ? `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg` : '',
+      videos: [],
+      audios: [],
+    };
+  }
+
   const medias = Array.isArray(raw.medias) ? raw.medias : [];
   const videos: any[] = [];
   const audios: any[] = [];
 
   for (const m of medias) {
     if (!m || !m.url) continue;
-    const fmt = m.format || '';
+    const fmt = String(m.format || '');
     const extMatch = fmt.match(/\[\.(\w+)\]/i);
     let rawExt = extMatch ? extMatch[1].toLowerCase() : (m.mime?.includes('audio') ? 'mp3' : 'mp4');
 
-    // Detect if this stream has a video resolution (2K, 4K, 8K, 1080p, etc.)
-    const hasVideoResolution = /([0-9]{3,4}p|\b[248]k\b|uhd|qhd|fhd)/i.test(fmt);
-    const isExplicitAudio = !hasVideoResolution && (
-      ['m4a', 'mp3', 'aac', 'opus', 'flac', 'wav', 'ogg'].includes(rawExt) ||
-      /kbps|audio only|audio-only/i.test(fmt)
-    );
+    // Any stream with audio containers (.m4a, .weba, .mp3, .aac, .opus) or audio mime is strictly an AUDIO stream
+    const isAudio =
+      ['m4a', 'weba', 'mp3', 'aac', 'opus', 'flac', 'wav', 'ogg'].includes(rawExt) ||
+      /kbps|audio only|audio-only|\.m4a|\.weba|\.mp3|\.aac|opus/i.test(fmt) ||
+      Boolean(m.mime && m.mime.includes('audio'));
 
-    let quality = '720p (HD)';
-    if (/8k|4320p/i.test(fmt)) quality = '4320p (8K Ultra HD)';
-    else if (/4k|2160p/i.test(fmt)) quality = '2160p (4K Ultra HD)';
-    else if (/2k|1440p/i.test(fmt)) quality = '1440p (2K Quad HD)';
-    else if (/1080p/i.test(fmt)) quality = '1080p (Full HD)';
-    else if (/720p/i.test(fmt)) quality = '720p (HD)';
-    else if (/480p/i.test(fmt)) quality = '480p (Standard)';
-    else if (/360p/i.test(fmt)) quality = '360p (Medium)';
-    else if (/240p/i.test(fmt)) quality = '240p (Low)';
-    else if (/144p/i.test(fmt)) quality = '144p (Eco)';
-    else if (isExplicitAudio) quality = '320 kbps (High Fidelity)';
+    if (isAudio) {
+      let quality = '128 kbps (Standard Audio)';
+      if (/4k|2k|1080p|320/i.test(fmt)) {
+        quality = '320 kbps (High Fidelity Audio)';
+      } else if (/720p|256/i.test(fmt)) {
+        quality = '256 kbps (High Quality Audio)';
+      } else if (/480p|128/i.test(fmt)) {
+        quality = '128 kbps (Standard Audio)';
+      } else if (/144p|240p|64/i.test(fmt)) {
+        quality = '64 kbps (Eco Audio)';
+      }
 
-    if (isExplicitAudio) {
+      const displayExt = rawExt === 'weba' ? 'WEBA' : rawExt.toUpperCase();
+
       audios.push({
         url: m.url,
-        quality: quality.includes('kbps') ? quality : '320 kbps (High Fidelity)',
-        format: fmt || 'MP3 Audio 320kbps',
-        extension: rawExt === 'weba' ? 'M4A' : rawExt.toUpperCase(),
+        quality,
+        format: fmt || `${quality} ${displayExt}`,
+        extension: displayExt,
         size: m.fileSize,
         sizeText: m.sizeStr || formatBytes(m.fileSize),
       });
     } else {
-      // If extension was weba but it's a 2K/4K/video stream, display as WEBM or MP4
-      const displayExt = (rawExt === 'weba' || rawExt === 'webm') ? 'WEBM' : rawExt.toUpperCase();
+      // It is a VIDEO stream
+      let quality = '720p (HD)';
+      if (/8k|4320p/i.test(fmt)) quality = '4320p (8K Ultra HD)';
+      else if (/4k|2160p/i.test(fmt)) quality = '2160p (4K Ultra HD)';
+      else if (/2k|1440p/i.test(fmt)) quality = '1440p (2K Quad HD)';
+      else if (/1080p/i.test(fmt)) quality = '1080p (Full HD)';
+      else if (/720p/i.test(fmt)) quality = '720p (HD)';
+      else if (/480p/i.test(fmt)) quality = '480p (Standard)';
+      else if (/360p/i.test(fmt)) quality = '360p (Medium)';
+      else if (/240p/i.test(fmt)) quality = '240p (Low)';
+      else if (/144p/i.test(fmt)) quality = '144p (Eco)';
+
+      const displayExt = rawExt.toUpperCase();
+
       videos.push({
         url: m.url,
         quality,
@@ -98,13 +120,48 @@ export function parseStreamData(raw: any, videoId?: string) {
     }
   }
 
-  // Sort videos strictly by resolution descending (8K -> 4K -> 2K -> 1080p -> 720p -> 480p...)
-  videos.sort((a, b) => getResolutionRank(b.quality) - getResolutionRank(a.quality));
+  // Deduplicate video streams
+  const uniqueVideos: any[] = [];
+  const seenVideo = new Set<string>();
+  for (const v of videos) {
+    const key = `${v.quality}_${v.extension}_${v.sizeText || ''}`;
+    if (!seenVideo.has(key)) {
+      seenVideo.add(key);
+      uniqueVideos.push(v);
+    }
+  }
 
-  // If audio wasn't separated in upstream payload, provide direct audio extracts from best stream
-  if (audios.length === 0 && videos.length > 0) {
-    const bestStream = videos[0];
-    audios.push({
+  // Sort videos strictly by resolution descending (8K -> 4K -> 2K -> 1080p -> 720p -> 480p...)
+  uniqueVideos.sort((a, b) => getResolutionRank(b.quality) - getResolutionRank(a.quality));
+
+  // Deduplicate audio streams
+  const uniqueAudios: any[] = [];
+  const seenAudio = new Set<string>();
+  for (const a of audios) {
+    const key = `${a.quality}_${a.extension}_${a.sizeText || ''}`;
+    if (!seenAudio.has(key)) {
+      seenAudio.add(key);
+      uniqueAudios.push(a);
+    }
+  }
+
+  // If audios list does not have MP3 format, add a 320kbps MP3 entry from the highest quality stream
+  if (uniqueAudios.length > 0 && !uniqueAudios.some((a) => a.extension === 'MP3')) {
+    const bestAudio = uniqueAudios[0];
+    uniqueAudios.unshift({
+      url: bestAudio.url,
+      quality: '320 kbps (High Fidelity)',
+      format: 'MP3 High Quality Audio',
+      extension: 'MP3',
+      size: bestAudio.size,
+      sizeText: bestAudio.sizeText || 'High Quality',
+    });
+  }
+
+  // If no audios were found at all, create audio options from the best video stream
+  if (uniqueAudios.length === 0 && uniqueVideos.length > 0) {
+    const bestStream = uniqueVideos[0];
+    uniqueAudios.push({
       url: bestStream.url,
       quality: '320 kbps (High Fidelity)',
       format: 'MP3 High Quality',
@@ -112,7 +169,7 @@ export function parseStreamData(raw: any, videoId?: string) {
       size: Math.round((bestStream.size || 25000000) * 0.15),
       sizeText: formatBytes(Math.round((bestStream.size || 25000000) * 0.15)) || '4.5 MB',
     });
-    audios.push({
+    uniqueAudios.push({
       url: bestStream.url,
       quality: '128 kbps (Standard)',
       format: 'M4A Audio Track',
@@ -128,7 +185,7 @@ export function parseStreamData(raw: any, videoId?: string) {
     duration: raw.duration,
     durationFormatted: raw.duration ? `${Math.floor(raw.duration / 60)}:${String(raw.duration % 60).padStart(2, '0')}` : undefined,
     thumbnail: raw.imageUrl || (videoId ? `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg` : ''),
-    videos,
-    audios,
+    videos: uniqueVideos,
+    audios: uniqueAudios,
   };
 }

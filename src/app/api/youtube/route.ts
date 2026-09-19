@@ -57,56 +57,9 @@ export async function POST(req: NextRequest) {
         });
       }
 
-      // FALLBACK: If upstream API fails or is temporarily rate-limited, attempt oEmbed metadata
-      if (videoId) {
-        try {
-          const oeRes = await fetch(`https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=${videoId}&format=json`);
-          if (oeRes.ok) {
-            const oeData = await oeRes.json();
-            return NextResponse.json({
-              ok: true,
-              data: {
-                id: videoId,
-                title: oeData.title || 'YouTube Video',
-                author: oeData.author_name,
-                thumbnail: `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`,
-                fallback: true,
-                videos: [
-                  {
-                    url: `https://www.youtube.com/watch?v=${videoId}`,
-                    quality: '1080p Full HD',
-                    format: '1080p MP4 (Stream)',
-                    extension: 'MP4',
-                    sizeText: 'High Quality',
-                  },
-                  {
-                    url: `https://www.youtube.com/watch?v=${videoId}`,
-                    quality: '720p HD',
-                    format: '720p MP4 (Direct Stream)',
-                    extension: 'MP4',
-                    sizeText: 'Standard HD',
-                  },
-                ],
-                audios: [
-                  {
-                    url: `https://www.youtube.com/watch?v=${videoId}`,
-                    quality: '320 kbps (High Fidelity)',
-                    format: 'MP3 High Quality Audio',
-                    extension: 'MP3',
-                    sizeText: 'Audio Track',
-                  },
-                ],
-              },
-            });
-          }
-        } catch {
-          // ignore fallback error
-        }
-      }
-
       return NextResponse.json({
         ok: false,
-        error: 'Unable to fetch video streams. Please check the URL or try again.',
+        error: 'Upstream server connection unavailable. Direct client stream resolution will activate.',
       }, { status: 400 });
     }
 

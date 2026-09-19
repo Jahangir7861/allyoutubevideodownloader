@@ -44,6 +44,13 @@ export const metadata: Metadata = {
   authors: [{ name: 'Jahangir', url: 'https://allyoutubevideodownloader.com/about' }],
   creator: 'Jahangir',
   publisher: 'All YouTube Video Downloader (Allyoutubevideodownloader.com)',
+  icons: {
+    icon: [
+      { url: '/icon.svg', type: 'image/svg+xml' },
+    ],
+    shortcut: '/icon.svg',
+    apple: '/icon.svg',
+  },
   robots: {
     index: true,
     follow: true,

@@ -162,52 +162,50 @@ export default function ToolInterface({ tool }: Props) {
       }
 
       let data: any = null;
+      const isMediaDownload = ['download', 'video', 'shorts', 'audio'].includes(action) || ['video', 'shorts', 'audio'].includes(tool.toolMode);
 
-      try {
-        const res = await fetch('/api/youtube', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ action, url: inputVal, topic: inputVal, type }),
-        });
-        const resJson = await res.json();
-        if (res.ok && resJson.ok) {
-          data = resJson;
-        } else if (resJson && resJson.error) {
-          data = resJson;
+      // 1. DIRECT CLIENT-SIDE RESOLUTION (High Speed, Full 4K/2K Options, Zero Vercel Restrictions)
+      // Browsers call directly from the user's residential IP with CORS *, completely bypassing Vercel datacenter limits.
+      if (isMediaDownload) {
+        const videoId = extractVideoId(inputVal);
+        const targetUrl = videoId ? `https://www.youtube.com/watch?v=${videoId}` : inputVal;
+
+        try {
+          const clientRes = await fetch('https://api.ytultra.com/ikool/youtube/download', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ url: targetUrl }),
+          });
+          const clientJson = await clientRes.json();
+          if (clientRes.ok && clientJson.code === '0000' && clientJson.data) {
+            data = {
+              ok: true,
+              data: parseStreamData(clientJson.data, videoId || undefined),
+            };
+          }
+        } catch (clientErr) {
+          console.warn('Browser direct fetch fallback failed or blocked by adblocker, falling back to backend:', clientErr);
         }
-      } catch (serverErr) {
-        console.warn('Local API call failed, trying direct stream resolution:', serverErr);
       }
 
-      // CLIENT-SIDE DIRECT FALLBACK: If Vercel server was blocked or returned fallback, fetch directly from browser!
-      const needsFullStreams =
-        !data ||
-        !data.ok ||
-        (data.data && (data.data.fallback || (data.data.videos?.length || 0) < 3));
-
-      if (needsFullStreams) {
-        if (['download', 'video', 'shorts', 'audio'].includes(action) || ['video', 'shorts', 'audio'].includes(tool.toolMode)) {
-          const videoId = extractVideoId(inputVal);
-          const targetUrl = videoId ? `https://www.youtube.com/watch?v=${videoId}` : inputVal;
-
-          try {
-            const clientRes = await fetch('https://api.ytultra.com/ikool/youtube/download', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify({ url: targetUrl }),
-            });
-            const clientJson = await clientRes.json();
-            if (clientRes.ok && clientJson.code === '0000' && clientJson.data) {
-              data = {
-                ok: true,
-                data: parseStreamData(clientJson.data, videoId || undefined),
-              };
-            }
-          } catch (clientErr) {
-            console.warn('Browser direct fetch fallback failed:', clientErr);
+      // 2. BACKEND API FALLBACK (Or primary handler for non-download creator tools)
+      if (!data || !data.ok) {
+        try {
+          const res = await fetch('/api/youtube', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ action, url: inputVal, topic: inputVal, type }),
+          });
+          const resJson = await res.json();
+          if (res.ok && resJson.ok) {
+            data = resJson;
+          } else if (resJson && resJson.error) {
+            data = resJson;
           }
+        } catch (serverErr) {
+          console.warn('Backend API call failed:', serverErr);
         }
       }
 

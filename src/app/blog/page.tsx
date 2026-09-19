@@ -15,6 +15,8 @@ const CATEGORIES = [
   'Storage & Low Data Hacks',
 ];
 
+const FALLBACK_BLOG_IMAGE = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="800" height="450" viewBox="0 0 800 450"><rect width="800" height="450" fill="%23141418"/><rect x="20" y="20" width="760" height="410" rx="20" fill="%231a1a22" stroke="%23333340" stroke-width="2"/><circle cx="400" cy="225" r="50" fill="%23ef4444" opacity="0.9"/><polygon points="390,205 390,245 420,225" fill="white"/></svg>`;
+
 export default function BlogIndexPage() {
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [searchQuery, setSearchQuery] = useState('');
@@ -105,6 +107,9 @@ export default function BlogIndexPage() {
                   <img
                     src={featuredPost.coverImage}
                     alt={featuredPost.title}
+                    onError={(e) => {
+                      e.currentTarget.src = FALLBACK_BLOG_IMAGE;
+                    }}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                   <div className="absolute top-4 left-4 bg-red-600/90 backdrop-blur-md text-white text-[11px] font-bold px-3 py-1 rounded-full uppercase tracking-wider">
@@ -203,6 +208,9 @@ export default function BlogIndexPage() {
                     <img
                       src={post.coverImage}
                       alt={post.title}
+                      onError={(e) => {
+                        e.currentTarget.src = FALLBACK_BLOG_IMAGE;
+                      }}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                     <div className="absolute top-3 left-3 bg-black/70 backdrop-blur-md border border-white/10 text-white text-[10px] font-bold px-2.5 py-1 rounded-md uppercase tracking-wider">
