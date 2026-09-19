@@ -179,8 +179,13 @@ export default function ToolInterface({ tool }: Props) {
         console.warn('Local API call failed, trying direct stream resolution:', serverErr);
       }
 
-      // CLIENT-SIDE DIRECT FALLBACK: If Vercel server was blocked or failed, fetch directly from browser!
-      if (!data || !data.ok) {
+      // CLIENT-SIDE DIRECT FALLBACK: If Vercel server was blocked or returned fallback, fetch directly from browser!
+      const needsFullStreams =
+        !data ||
+        !data.ok ||
+        (data.data && (data.data.fallback || (data.data.videos?.length || 0) < 3));
+
+      if (needsFullStreams) {
         if (['download', 'video', 'shorts', 'audio'].includes(action) || ['video', 'shorts', 'audio'].includes(tool.toolMode)) {
           const videoId = extractVideoId(inputVal);
           const targetUrl = videoId ? `https://www.youtube.com/watch?v=${videoId}` : inputVal;
@@ -413,10 +418,10 @@ export default function ToolInterface({ tool }: Props) {
 
                           {/* Direct Streaming Download */}
                           <a
-                            href={`/api/proxy-download?url=${encodeURIComponent(item.url)}&title=${encodeURIComponent(
-                              result.title || 'video'
-                            )}&ext=${item.extension.toLowerCase()}`}
-                            download
+                            href={item.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            download={`${(result.title || 'video').replace(/[^a-zA-Z0-9_\-\s]/g, '').trim().slice(0, 60)}.${item.extension.toLowerCase()}`}
                             className="px-4 py-2 bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-500 hover:to-rose-500 text-white text-xs font-semibold rounded-xl flex items-center gap-1.5 shadow-md shadow-red-500/20 transition-all hover:scale-[1.02] active:scale-[0.98]"
                           >
                             <Download className="w-3.5 h-3.5" />
@@ -429,6 +434,14 @@ export default function ToolInterface({ tool }: Props) {
                 ) : (
                   <p className="text-xs text-zinc-500 py-6 text-center">{t('noStreams')}</p>
                 )}
+              </div>
+
+              {/* Direct CDN Stream Fast Download Note */}
+              <div className="mt-3.5 p-3 rounded-xl bg-white/[0.03] border border-white/10 flex items-start gap-2.5 text-xs text-zinc-400">
+                <span className="text-amber-400 font-bold shrink-0 mt-0.5">⚡ Fast Download:</span>
+                <span className="leading-relaxed">
+                  Downloads stream directly from YouTube's CDN at full speed with <strong>no size limits or cutoffs</strong>. If the stream opens in your browser player, press <kbd className="px-1.5 py-0.5 rounded bg-white/10 text-white font-mono text-[10px]">Ctrl + S</kbd> or tap the player menu (⋮) &rarr; <strong>Download</strong> to save the complete video file.
+                </span>
               </div>
             </div>
           )}
