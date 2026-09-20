@@ -46,30 +46,37 @@ export default function FaqAccordion({ faqs }: Props) {
               key={idx}
               className="border border-stone-200 rounded-xl overflow-hidden bg-stone-50 transition-all"
             >
-              <button
-                type="button"
-                onClick={() => toggle(idx)}
-                className="w-full flex items-center justify-between px-5 py-4 text-left hover:bg-white transition-colors gap-4"
-              >
-                <h3 className="font-semibold text-stone-800 text-sm leading-snug font-syne">
-                  {item.q}
-                </h3>
-                <span
-                  className={`text-stone-400 text-xl leading-none shrink-0 transition-transform duration-200 ${
-                    isOpen ? 'rotate-45 text-red-500' : ''
-                  }`}
+              <h3 className="m-0 font-semibold text-stone-800 text-sm leading-snug font-syne">
+                <button
+                  type="button"
+                  id={`faq-question-${idx}`}
+                  aria-expanded={isOpen}
+                  aria-controls={`faq-answer-${idx}`}
+                  onClick={() => toggle(idx)}
+                  className="w-full flex items-center justify-between px-5 py-4 text-left hover:bg-white transition-colors gap-4"
                 >
-                  +
-                </span>
-              </button>
+                  <span>{item.q}</span>
+                  <span
+                    aria-hidden="true"
+                    className={`text-stone-500 text-xl leading-none shrink-0 transition-transform duration-200 ${
+                      isOpen ? 'rotate-45 text-red-500' : ''
+                    }`}
+                  >
+                    +
+                  </span>
+                </button>
+              </h3>
 
               <div
+                id={`faq-answer-${idx}`}
+                role="region"
+                aria-labelledby={`faq-question-${idx}`}
                 className={`overflow-hidden transition-all duration-200 ${
                   isOpen ? 'max-h-96' : 'max-h-0'
                 }`}
               >
                 <div className="border-t border-stone-100 px-5 pt-4 pb-5 bg-white">
-                  <p className="text-stone-500 text-sm leading-relaxed">{item.a}</p>
+                  <p className="text-stone-600 text-sm leading-relaxed">{item.a}</p>
                 </div>
               </div>
             </div>

@@ -39,7 +39,12 @@ export default function CookieConsent() {
   if (!visible) return null;
 
   return (
-    <div className="fixed bottom-4 left-4 right-4 md:left-auto md:right-6 md:max-w-md z-50 animate-in fade-in slide-in-from-bottom-5 duration-300">
+    <div
+      role="dialog"
+      aria-modal="false"
+      aria-label="Cookie consent banner"
+      className="fixed bottom-4 left-4 right-4 md:left-auto md:right-6 md:max-w-md z-50 animate-in fade-in slide-in-from-bottom-5 duration-300"
+    >
       <div className="bg-[#141418]/95 backdrop-blur-xl border border-white/15 p-5 rounded-2xl shadow-2xl text-white">
         <div className="flex items-start gap-3 mb-3">
           <div className="w-8 h-8 rounded-lg bg-red-500/20 border border-red-500/30 flex items-center justify-center shrink-0 mt-0.5">
@@ -66,12 +71,14 @@ export default function CookieConsent() {
 
           <div className="flex items-center gap-2 w-full sm:w-auto">
             <button
+              type="button"
               onClick={handleDecline}
               className="flex-1 sm:flex-none px-3.5 py-1.5 rounded-xl border border-white/15 hover:bg-white/5 text-xs text-zinc-300 font-medium transition-colors"
             >
               {t('cookieEssential') || 'Essential Only'}
             </button>
             <button
+              type="button"
               onClick={handleAccept}
               className="flex-1 sm:flex-none px-4 py-1.5 rounded-xl bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-500 hover:to-rose-500 text-xs text-white font-semibold shadow-md shadow-red-500/25 transition-all"
             >

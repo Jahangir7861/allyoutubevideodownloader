@@ -211,7 +211,7 @@ export default function ToolPageComponent({ slug }: Props) {
                 <div className="font-semibold text-stone-800 text-sm mb-1.5 group-hover:text-red-500 transition-colors font-syne">
                   {rel.name}
                 </div>
-                <div className="text-stone-400 text-xs leading-relaxed">{rel.desc}</div>
+                <div className="text-stone-600 text-xs leading-relaxed">{rel.desc}</div>
               </Link>
             ))}
           </div>

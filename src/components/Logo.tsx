@@ -73,7 +73,11 @@ export default function Logo({ size = 'md', showSubtitle = true, className = '',
   );
 
   if (href) {
-    return <Link href={href}>{content}</Link>;
+    return (
+      <Link href={href} aria-label="All YouTube Video Downloader Homepage">
+        {content}
+      </Link>
+    );
   }
 
   return content;

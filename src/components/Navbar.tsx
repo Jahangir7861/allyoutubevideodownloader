@@ -96,7 +96,7 @@ export default function Navbar() {
   }, [pathname]);
 
   return (
-    <nav ref={navRef} className="sticky top-0 z-50 bg-[#0e0e10]/95 backdrop-blur-xl border-b border-white/10 transition-all">
+    <nav ref={navRef} aria-label="Main Navigation" className="sticky top-0 z-50 bg-[#0e0e10]/95 backdrop-blur-xl border-b border-white/10 transition-all">
       <div className="w-[92%] md:w-[88%] mx-auto flex items-center justify-between py-3">
         {/* Logo */}
         <Logo size="sm" showSubtitle={true} href="/" />
@@ -106,6 +106,9 @@ export default function Navbar() {
           {MENU_GROUPS.map((group, idx) => (
             <div key={group.key} className="relative">
               <button
+                type="button"
+                aria-expanded={openGroup === idx}
+                aria-haspopup="true"
                 onClick={() => {
                   setOpenGroup(openGroup === idx ? null : idx);
                   setLangDropdownOpen(false);
@@ -122,7 +125,7 @@ export default function Navbar() {
               {openGroup === idx && (
                 <div className="absolute top-full left-0 mt-2 w-72 bg-[#141418] border border-white/10 rounded-xl shadow-2xl p-2 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
                   <div className="px-3 py-1.5 border-b border-white/5 flex items-center justify-between mb-1">
-                    <span className="text-[11px] font-semibold uppercase tracking-wider text-zinc-500">
+                    <span className="text-[11px] font-semibold uppercase tracking-wider text-zinc-400">
                       {t(group.key) || group.defaultLabel}
                     </span>
                     <span className={`text-[10px] px-1.5 py-0.5 rounded font-medium ${group.badge === 'Pro' ? 'bg-red-500/20 text-red-400' : 'bg-emerald-500/20 text-emerald-400'}`}>
@@ -139,7 +142,7 @@ export default function Navbar() {
                         <div className="text-sm font-medium text-zinc-200 group-hover/item:text-red-400 transition-colors">
                           {item.name}
                         </div>
-                        <div className="text-xs text-zinc-500 truncate">{item.desc}</div>
+                        <div className="text-xs text-zinc-400 truncate">{item.desc}</div>
                       </Link>
                     ))}
                   </div>
@@ -164,6 +167,10 @@ export default function Navbar() {
           {/* Multi-Language Dropdown */}
           <div className="relative">
             <button
+              type="button"
+              aria-label={`Current language: ${currentLangObj.nativeName}. Click to change language`}
+              aria-expanded={langDropdownOpen}
+              aria-haspopup="true"
               onClick={() => {
                 setLangDropdownOpen(!langDropdownOpen);
                 setOpenGroup(null);
@@ -177,13 +184,14 @@ export default function Navbar() {
 
             {langDropdownOpen && (
               <div className="absolute right-0 top-full mt-2 w-48 bg-[#141418] border border-white/10 rounded-xl shadow-2xl p-1.5 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
-                <div className="px-3 py-1 text-[10px] uppercase font-bold text-zinc-500 tracking-wider">
+                <div className="px-3 py-1 text-[10px] uppercase font-bold text-zinc-400 tracking-wider">
                   Select Language
                 </div>
                 <div className="space-y-0.5 mt-1 max-h-64 overflow-y-auto">
                   {LANGUAGES.map((l) => (
                     <button
                       key={l.code}
+                      type="button"
                       onClick={() => {
                         setLang(l.code);
                         setLangDropdownOpen(false);
@@ -214,9 +222,11 @@ export default function Navbar() {
 
           {/* Mobile Menu Toggle Button */}
           <button
+            type="button"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className="lg:hidden p-2 rounded-lg text-zinc-400 hover:text-white hover:bg-white/5 transition-colors"
-            aria-label="Toggle menu"
+            aria-label={mobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+            aria-expanded={mobileMenuOpen}
           >
             {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
@@ -230,6 +240,8 @@ export default function Navbar() {
             {MENU_GROUPS.map((group, idx) => (
               <div key={group.key} className="border-b border-white/5 pb-3 last:border-0">
                 <button
+                  type="button"
+                  aria-expanded={mobileSubGroup === idx}
                   onClick={() => setMobileSubGroup(mobileSubGroup === idx ? null : idx)}
                   className="w-full flex items-center justify-between py-2 text-left text-zinc-200 font-semibold text-sm"
                 >
@@ -251,7 +263,7 @@ export default function Navbar() {
                         className="py-2 px-2 text-xs text-zinc-400 hover:text-white hover:bg-white/5 rounded-md flex flex-col"
                       >
                         <span className="text-zinc-200 font-medium">{item.name}</span>
-                        <span className="text-zinc-500 text-[11px]">{item.desc}</span>
+                        <span className="text-zinc-400 text-[11px]">{item.desc}</span>
                       </Link>
                     ))}
                   </div>

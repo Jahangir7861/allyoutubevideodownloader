@@ -71,19 +71,19 @@ export default function HomePage() {
           <div className="mt-14 pt-8 border-t border-white/10 grid grid-cols-2 sm:grid-cols-4 gap-6 text-center max-w-3xl mx-auto">
             <div className="p-3 rounded-xl bg-white/[0.02] border border-white/5">
               <div className="text-2xl font-extrabold text-white font-syne">150K+</div>
-              <div className="text-xs text-zinc-500 uppercase tracking-wider font-semibold mt-1">{t('creatorsCount')}</div>
+              <div className="text-xs text-zinc-400 uppercase tracking-wider font-semibold mt-1">{t('creatorsCount')}</div>
             </div>
             <div className="p-3 rounded-xl bg-white/[0.02] border border-white/5">
               <div className="text-2xl font-extrabold text-white font-syne">50+</div>
-              <div className="text-xs text-zinc-500 uppercase tracking-wider font-semibold mt-1">{t('languagesCount')}</div>
+              <div className="text-xs text-zinc-400 uppercase tracking-wider font-semibold mt-1">{t('languagesCount')}</div>
             </div>
             <div className="p-3 rounded-xl bg-white/[0.02] border border-white/5">
               <div className="text-2xl font-extrabold text-white font-syne">&lt; 2s</div>
-              <div className="text-xs text-zinc-500 uppercase tracking-wider font-semibold mt-1">{t('avgSpeed')}</div>
+              <div className="text-xs text-zinc-400 uppercase tracking-wider font-semibold mt-1">{t('avgSpeed')}</div>
             </div>
             <div className="p-3 rounded-xl bg-white/[0.02] border border-white/5">
               <div className="text-2xl font-extrabold text-white font-syne">20+</div>
-              <div className="text-xs text-zinc-500 uppercase tracking-wider font-semibold mt-1">{t('coreToolsCount')}</div>
+              <div className="text-xs text-zinc-400 uppercase tracking-wider font-semibold mt-1">{t('coreToolsCount')}</div>
             </div>
           </div>
         </div>
@@ -484,7 +484,7 @@ export default function HomePage() {
                 <div className="text-4xl font-extrabold text-stone-900 font-syne mb-1">
                   $49 <span className="text-sm font-normal text-stone-500">/mo</span>
                 </div>
-                <p className="text-stone-400 text-[11px] mb-6">{t('agencySub')}</p>
+                <p className="text-stone-600 text-[11px] mb-6">{t('agencySub')}</p>
                 <ul className="space-y-3 text-xs text-stone-600 mb-8">
                   <li className="flex items-center gap-2 font-semibold">{t('agencyTier1')}</li>
                   <li className="flex items-center gap-2">{t('agencyTier2')}</li>

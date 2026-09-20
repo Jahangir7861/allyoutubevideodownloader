@@ -228,11 +228,16 @@ export default function ToolInterface({ tool }: Props) {
       {/* Input Box Section with Glassmorphism */}
       <div className="max-w-2xl mx-auto">
         <form onSubmit={handleAction} className="relative group">
+          <label htmlFor="youtube-url-input" className="sr-only">
+            {tool.inputPlaceholder || t('placeholder') || 'YouTube Video URL or Keywords'}
+          </label>
           <div className="flex flex-col sm:flex-row gap-2.5 p-1.5 rounded-2xl bg-white/[0.06] border border-white/20 focus-within:border-red-500/80 focus-within:ring-2 focus-within:ring-red-500/20 shadow-2xl backdrop-blur-md transition-all">
             <div className="flex-1 flex items-center gap-2.5 px-3.5 py-1">
               <input
+                id="youtube-url-input"
                 type="text"
                 value={inputVal}
+                aria-label={tool.inputPlaceholder || t('placeholder') || 'YouTube Video URL or Keywords'}
                 onChange={(e) => {
                   setInputVal(e.target.value);
                   if (error) setError('');
@@ -246,6 +251,7 @@ export default function ToolInterface({ tool }: Props) {
                 type="button"
                 onClick={handlePaste}
                 title="Paste from clipboard"
+                aria-label="Paste URL from clipboard"
                 className="hidden sm:inline-flex items-center gap-1 text-[11px] px-2.5 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-zinc-300 hover:text-white font-medium transition-colors shrink-0"
               >
                 <Clipboard className="w-3 h-3" />
@@ -256,7 +262,8 @@ export default function ToolInterface({ tool }: Props) {
                 <button
                   type="button"
                   onClick={() => setInputVal('')}
-                  className="text-xs text-zinc-500 hover:text-zinc-300 p-1 rounded-md"
+                  aria-label="Clear input text"
+                  className="text-xs text-zinc-400 hover:text-zinc-200 p-1 rounded-md"
                 >
                   ✕
                 </button>
@@ -266,6 +273,7 @@ export default function ToolInterface({ tool }: Props) {
             <button
               type="submit"
               disabled={loading}
+              aria-busy={loading}
               className="shrink-0 px-7 py-3 bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-500 hover:to-rose-500 disabled:opacity-60 text-white text-sm font-semibold rounded-xl shadow-lg shadow-red-500/30 transition-all flex items-center justify-center gap-2 whitespace-nowrap hover:scale-[1.01] active:scale-[0.99]"
             >
               {loading ? (
@@ -281,7 +289,7 @@ export default function ToolInterface({ tool }: Props) {
         </form>
 
         {/* Server storage assurance badge */}
-        <div className="mt-3 flex items-center justify-center gap-2 text-[11px] text-zinc-500">
+        <div className="mt-3 flex items-center justify-center gap-2 text-[11px] text-zinc-400">
           <Shield className="w-3.5 h-3.5 text-emerald-400" />
           <span>{t('cloudStreamNotice')}</span>
         </div>
@@ -324,6 +332,8 @@ export default function ToolInterface({ tool }: Props) {
                     {result.durationFormatted && <span>{t('duration')}: {result.durationFormatted}</span>}
                     {result.id && (
                       <button
+                        type="button"
+                        aria-expanded={showPreview}
                         onClick={() => setShowPreview(!showPreview)}
                         className="inline-flex items-center gap-1 text-red-400 hover:text-red-300 font-medium transition-colors"
                       >
@@ -414,8 +424,10 @@ export default function ToolInterface({ tool }: Props) {
                         <div className="flex items-center gap-2">
                           {/* Copy Direct Link Button */}
                           <button
+                            type="button"
                             onClick={() => handleCopyStreamLink(item.url, idx)}
                             title="Copy direct CDN link"
+                            aria-label="Copy direct CDN link"
                             className="p-2 rounded-lg bg-white/5 hover:bg-white/15 text-zinc-400 hover:text-white text-xs transition-colors"
                           >
                             {copiedLinkIndex === idx ? (
@@ -601,13 +613,15 @@ export default function ToolInterface({ tool }: Props) {
                     className="flex items-center justify-between p-3 rounded-xl bg-white/[0.03] hover:bg-white/[0.06] border border-white/5 transition-colors group"
                   >
                     <div className="flex items-center gap-3 min-w-0 pr-3">
-                      <span className="text-xs text-zinc-500 font-mono">{idx + 1}.</span>
+                      <span className="text-xs text-zinc-400 font-mono">{idx + 1}.</span>
                       <span className="text-xs sm:text-sm text-zinc-200 font-medium truncate">{title}</span>
                     </div>
                     <button
+                      type="button"
                       onClick={() => handleCopy(title)}
                       className="p-1.5 rounded-lg text-zinc-400 hover:text-white bg-white/5 hover:bg-white/15 transition-colors shrink-0"
                       title="Copy title"
+                      aria-label={`Copy title: ${title}`}
                     >
                       <Copy className="w-3.5 h-3.5" />
                     </button>

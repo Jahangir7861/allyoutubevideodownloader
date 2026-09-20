@@ -18,7 +18,7 @@ export default function Footer() {
             <div className="mb-3">
               <Logo size="sm" showSubtitle={true} href="/" />
             </div>
-            <p className="text-zinc-500 text-xs leading-relaxed max-w-xs mb-4">
+            <p className="text-zinc-400 text-xs leading-relaxed max-w-xs mb-4">
               All YouTube Video Downloader (Allyoutubevideodownloader.com) is the fastest in-memory cloud streaming tool for YouTube creators, editors, and students. Zero server disk storage.
             </p>
 
@@ -38,32 +38,32 @@ export default function Footer() {
             </div>
             <ul className="space-y-2.5">
               <li>
-                <Link href="/youtube-video-downloader" className="text-zinc-500 hover:text-zinc-200 text-xs transition-colors">
+                <Link href="/youtube-video-downloader" className="text-zinc-400 hover:text-zinc-200 text-xs transition-colors">
                   {t('videoDownloader') || 'Video Downloader'}
                 </Link>
               </li>
               <li>
-                <Link href="/youtube-shorts-downloader" className="text-zinc-500 hover:text-zinc-200 text-xs transition-colors">
+                <Link href="/youtube-shorts-downloader" className="text-zinc-400 hover:text-zinc-200 text-xs transition-colors">
                   {t('shortsDownloader') || 'Shorts Downloader'}
                 </Link>
               </li>
               <li>
-                <Link href="/youtube-to-mp3" className="text-zinc-500 hover:text-zinc-200 text-xs transition-colors">
+                <Link href="/youtube-to-mp3" className="text-zinc-400 hover:text-zinc-200 text-xs transition-colors">
                   {t('youtubeToMp3') || 'YouTube to MP3'}
                 </Link>
               </li>
               <li>
-                <Link href="/youtube-thumbnail-downloader" className="text-zinc-500 hover:text-zinc-200 text-xs transition-colors">
+                <Link href="/youtube-thumbnail-downloader" className="text-zinc-400 hover:text-zinc-200 text-xs transition-colors">
                   {t('thumbnailDownloader') || 'Thumbnail Downloader'}
                 </Link>
               </li>
               <li>
-                <Link href="/youtube-shorts-thumbnail-downloader" className="text-zinc-500 hover:text-zinc-200 text-xs transition-colors">
+                <Link href="/youtube-shorts-thumbnail-downloader" className="text-zinc-400 hover:text-zinc-200 text-xs transition-colors">
                   {t('shortsThumbnail') || 'Shorts Thumbnail'}
                 </Link>
               </li>
               <li>
-                <Link href="/how-to-download-youtube-thumbnails" className="text-zinc-500 hover:text-zinc-200 text-xs transition-colors">
+                <Link href="/how-to-download-youtube-thumbnails" className="text-zinc-400 hover:text-zinc-200 text-xs transition-colors">
                   {t('thumbnailGuide') || 'Thumbnail Guide'}
                 </Link>
               </li>
@@ -77,27 +77,27 @@ export default function Footer() {
             </div>
             <ul className="space-y-2.5">
               <li>
-                <Link href="/youtube-title-generator" className="text-zinc-500 hover:text-zinc-200 text-xs transition-colors">
+                <Link href="/youtube-title-generator" className="text-zinc-400 hover:text-zinc-200 text-xs transition-colors">
                   {t('titleGenerator') || 'Title Generator'}
                 </Link>
               </li>
               <li>
-                <Link href="/youtube-description-generator" className="text-zinc-500 hover:text-zinc-200 text-xs transition-colors">
+                <Link href="/youtube-description-generator" className="text-zinc-400 hover:text-zinc-200 text-xs transition-colors">
                   {t('descriptionGenerator') || 'Description Generator'}
                 </Link>
               </li>
               <li>
-                <Link href="/youtube-tag-generator" className="text-zinc-500 hover:text-zinc-200 text-xs transition-colors">
+                <Link href="/youtube-tag-generator" className="text-zinc-400 hover:text-zinc-200 text-xs transition-colors">
                   {t('tagGenerator') || 'Tag Generator'}
                 </Link>
               </li>
               <li>
-                <Link href="/youtube-tag-extractor" className="text-zinc-500 hover:text-zinc-200 text-xs transition-colors">
+                <Link href="/youtube-tag-extractor" className="text-zinc-400 hover:text-zinc-200 text-xs transition-colors">
                   {t('tagExtractor') || 'Tag Extractor'}
                 </Link>
               </li>
               <li>
-                <Link href="/youtube-description-extractor" className="text-zinc-500 hover:text-zinc-200 text-xs transition-colors">
+                <Link href="/youtube-description-extractor" className="text-zinc-400 hover:text-zinc-200 text-xs transition-colors">
                   {t('descriptionExtractor') || 'Description Extractor'}
                 </Link>
               </li>
@@ -111,17 +111,17 @@ export default function Footer() {
             </div>
             <ul className="space-y-2.5">
               <li>
-                <Link href="/youtube-script-generator" className="text-zinc-500 hover:text-zinc-200 text-xs transition-colors">
+                <Link href="/youtube-script-generator" className="text-zinc-400 hover:text-zinc-200 text-xs transition-colors">
                   {t('scriptGenerator') || 'Script Generator'}
                 </Link>
               </li>
               <li>
-                <Link href="/youtube-video-summary" className="text-zinc-500 hover:text-zinc-200 text-xs transition-colors">
+                <Link href="/youtube-video-summary" className="text-zinc-400 hover:text-zinc-200 text-xs transition-colors">
                   {t('videoAnalyzer') || 'Video Analyzer'}
                 </Link>
               </li>
               <li>
-                <Link href="/youtube-transcript-generator" className="text-zinc-500 hover:text-zinc-200 text-xs transition-colors">
+                <Link href="/youtube-transcript-generator" className="text-zinc-400 hover:text-zinc-200 text-xs transition-colors">
                   {t('transcriptGenerator') || 'Transcript Generator'}
                 </Link>
               </li>
@@ -146,32 +146,32 @@ export default function Footer() {
             </div>
             <ul className="space-y-2.5">
               <li>
-                <Link href="/about" className="text-zinc-500 hover:text-zinc-200 text-xs transition-colors flex items-center gap-1.5">
-                  <Info className="w-3 h-3 text-zinc-500" />
+                <Link href="/about" className="text-zinc-400 hover:text-zinc-200 text-xs transition-colors flex items-center gap-1.5">
+                  <Info className="w-3 h-3 text-zinc-400" />
                   <span>{t('aboutUs') || 'About Us'}</span>
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="text-zinc-500 hover:text-zinc-200 text-xs transition-colors flex items-center gap-1.5">
-                  <Mail className="w-3 h-3 text-zinc-500" />
+                <Link href="/contact" className="text-zinc-400 hover:text-zinc-200 text-xs transition-colors flex items-center gap-1.5">
+                  <Mail className="w-3 h-3 text-zinc-400" />
                   <span>{t('contactUs') || 'Contact Us'}</span>
                 </Link>
               </li>
               <li>
-                <Link href="/privacy" className="text-zinc-500 hover:text-zinc-200 text-xs transition-colors flex items-center gap-1.5">
-                  <Shield className="w-3 h-3 text-zinc-500" />
+                <Link href="/privacy" className="text-zinc-400 hover:text-zinc-200 text-xs transition-colors flex items-center gap-1.5">
+                  <Shield className="w-3 h-3 text-zinc-400" />
                   <span>{t('privacyPolicy') || 'Privacy Policy'}</span>
                 </Link>
               </li>
               <li>
-                <Link href="/terms" className="text-zinc-500 hover:text-zinc-200 text-xs transition-colors flex items-center gap-1.5">
-                  <FileText className="w-3 h-3 text-zinc-500" />
+                <Link href="/terms" className="text-zinc-400 hover:text-zinc-200 text-xs transition-colors flex items-center gap-1.5">
+                  <FileText className="w-3 h-3 text-zinc-400" />
                   <span>{t('termsOfService') || 'Terms of Service'}</span>
                 </Link>
               </li>
               <li>
-                <Link href="/dmca" className="text-zinc-500 hover:text-zinc-200 text-xs transition-colors flex items-center gap-1.5">
-                  <Scale className="w-3 h-3 text-zinc-500" />
+                <Link href="/dmca" className="text-zinc-400 hover:text-zinc-200 text-xs transition-colors flex items-center gap-1.5">
+                  <Scale className="w-3 h-3 text-zinc-400" />
                   <span>{t('dmcaNotice') || 'DMCA Disclaimer'}</span>
                 </Link>
               </li>
@@ -180,7 +180,7 @@ export default function Footer() {
         </div>
 
         {/* Bottom Copyright & Prominent Signature */}
-        <div className="border-t border-white/5 pt-6 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-zinc-500">
+        <div className="border-t border-white/5 pt-6 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-zinc-400">
           <div className="flex flex-col sm:flex-row items-center gap-2 text-center sm:text-left">
             <span>© 2026 All YouTube Video Downloader (Allyoutubevideodownloader.com) — {t('allRightsReserved') || 'All rights reserved.'}</span>
             <span className="hidden sm:inline text-zinc-700">•</span>
