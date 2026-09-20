@@ -22,6 +22,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: tool.meta.title,
     description: tool.meta.description,
     keywords: tool.meta.keywords,
+    alternates: {
+      canonical: `https://allyoutubevideodownloader.com/${tool.slug}`,
+    },
   };
 }
 

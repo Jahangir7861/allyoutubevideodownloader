@@ -44,6 +44,9 @@ export const metadata: Metadata = {
   authors: [{ name: 'Jahangir', url: 'https://allyoutubevideodownloader.com/about' }],
   creator: 'Jahangir',
   publisher: 'All YouTube Video Downloader (Allyoutubevideodownloader.com)',
+  alternates: {
+    canonical: 'https://allyoutubevideodownloader.com',
+  },
   icons: {
     icon: [
       { url: '/icon.svg', type: 'image/svg+xml' },
@@ -72,7 +75,7 @@ export const metadata: Metadata = {
       'Download 4K/1080p videos, extract audio to 320kbps MP3, grab HD thumbnails, and optimize YouTube SEO.',
     images: [
       {
-        url: '/og-image.png',
+        url: '/opengraph-image',
         width: 1200,
         height: 630,
         alt: 'All YouTube Video Downloader',
@@ -83,7 +86,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'All YouTube Video Downloader',
     description: 'Download any YouTube video in 4K, 1080p, or MP3 — free, fast, and no software required.',
-    images: ['/og-image.png'],
+    images: ['/opengraph-image'],
   },
   other: {
     'google-adsense-account': 'ca-pub-0000000000000000',
@@ -95,21 +98,51 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'WebApplication',
-    name: 'All YouTube Video Downloader - Allyoutubevideodownloader.com',
-    url: 'https://allyoutubevideodownloader.com',
-    applicationCategory: 'MultimediaApplication',
-    operatingSystem: 'All',
-    offers: {
-      '@type': 'Offer',
-      price: '0',
-      priceCurrency: 'USD',
+  const jsonLd = [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'WebSite',
+      name: 'All YouTube Video Downloader',
+      alternateName: 'Allyoutubevideodownloader.com',
+      url: 'https://allyoutubevideodownloader.com',
+      potentialAction: {
+        '@type': 'SearchAction',
+        target: 'https://allyoutubevideodownloader.com/?q={search_term_string}',
+        'query-input': 'required name=search_term_string',
+      },
     },
-    description:
-      'Fast, free online YouTube video downloader, audio extractor, and creator SEO toolkit.',
-  };
+    {
+      '@context': 'https://schema.org',
+      '@type': 'Organization',
+      name: 'All YouTube Video Downloader',
+      url: 'https://allyoutubevideodownloader.com',
+      logo: 'https://allyoutubevideodownloader.com/icon.svg',
+      founder: {
+        '@type': 'Person',
+        name: 'Jahangir',
+      },
+      contactPoint: {
+        '@type': 'ContactPoint',
+        email: 'support@allyoutubevideodownloader.com',
+        contactType: 'customer service',
+      },
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'WebApplication',
+      name: 'All YouTube Video Downloader - Allyoutubevideodownloader.com',
+      url: 'https://allyoutubevideodownloader.com',
+      applicationCategory: 'MultimediaApplication',
+      operatingSystem: 'All',
+      offers: {
+        '@type': 'Offer',
+        price: '0',
+        priceCurrency: 'USD',
+      },
+      description:
+        'Fast, free online YouTube video downloader, audio extractor, and creator SEO toolkit.',
+    },
+  ];
 
   return (
     <html lang="en" className={`${syne.variable} ${dmSans.variable}`}>

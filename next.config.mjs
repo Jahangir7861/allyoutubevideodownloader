@@ -24,6 +24,20 @@ const nextConfig = {
       { protocol: 'https', hostname: 'yt3.googleusercontent.com' },
     ],
   },
+  async redirects() {
+    return [
+      {
+        source: '/en',
+        destination: '/',
+        permanent: true,
+      },
+      {
+        source: '/en/:slug*',
+        destination: '/:slug*',
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;
