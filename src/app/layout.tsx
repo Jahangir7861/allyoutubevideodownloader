@@ -90,7 +90,7 @@ export const metadata: Metadata = {
     images: ['/opengraph-image'],
   },
   other: {
-    'google-adsense-account': 'ca-pub-0000000000000000',
+    'google-adsense-account': 'ca-pub-4584603449101035',
   },
 };
 
@@ -172,7 +172,7 @@ export default function RootLayout({
         {/* Google AdSense script placeholder ready for publisher verification */}
         <Script
           id="adsbygoogle-init"
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4584603449101035"
           crossOrigin="anonymous"
           strategy="lazyOnload"
         />
