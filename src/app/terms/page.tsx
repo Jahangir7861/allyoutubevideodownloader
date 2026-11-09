@@ -27,11 +27,11 @@ export default function TermsPage() {
         {/* Header */}
         <div className="border-b border-white/10 pb-8 mb-10">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium bg-red-500/10 text-red-400 border border-red-500/20 mb-4">
-            <FileText className="w-3.5 h-3.5 text-red-500" />
+            <FileText className="w-3.5 h-3.5 text-red-700" />
             <span>Legal Agreement & Fair Use Guidelines</span>
           </div>
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight font-syne mb-3">
-            Terms of <span className="text-red-500">Service</span>
+            Terms of <span className="text-red-700">Service</span>
           </h1>
           <p className="text-zinc-400 text-sm md:text-base">
             Effective Date: September 18, 2026 | All YouTube Video Downloader (Allyoutubevideodownloader.com)
@@ -49,7 +49,7 @@ export default function TermsPage() {
           {/* Section 1 */}
           <section className="space-y-3">
             <h2 className="text-xl font-bold text-white font-syne flex items-center gap-2">
-              <span className="text-red-500">1.</span> Permitted Fair Use & Purpose
+              <span className="text-red-700">1.</span> Permitted Fair Use & Purpose
             </h2>
             <p>
               All YouTube Video Downloader provides web-based utilities engineered for content creators, researchers, teachers, students, and digital archivists to extract publicly accessible multimedia files (such as high-definition MP4 videos, MP3 audio, and thumbnail image files).
@@ -73,7 +73,7 @@ export default function TermsPage() {
           {/* Section 2 */}
           <section className="space-y-3">
             <h2 className="text-xl font-bold text-white font-syne flex items-center gap-2">
-              <span className="text-red-500">2.</span> Non-Affiliation with YouTube or Google LLC
+              <span className="text-red-700">2.</span> Non-Affiliation with YouTube or Google LLC
             </h2>
             <p>
               YouTube™ is a registered trademark of Google LLC. <strong>All YouTube Video Downloader (Allyoutubevideodownloader.com)</strong> is an independent software tool and web service created by Jahangir. All YouTube Video Downloader is not affiliated with, authorized, maintained, sponsored, or in any way officially connected with YouTube, Google LLC, or any of their affiliates or subsidiaries.
@@ -86,7 +86,7 @@ export default function TermsPage() {
           {/* Section 3 */}
           <section className="space-y-3">
             <h2 className="text-xl font-bold text-white font-syne flex items-center gap-2">
-              <span className="text-red-500">3.</span> Zero-Retention Server Architecture
+              <span className="text-red-700">3.</span> Zero-Retention Server Architecture
             </h2>
             <p>
               All YouTube Video Downloader does not host, store, catalog, or archive media files on its servers. When a user requests a download, our server acts purely as an ephemeral proxy/pipe, streaming bits directly in system memory from public content distribution networks to the user&apos;s browser. Once the download session completes, all buffered bytes in RAM are instantly flushed.
@@ -96,7 +96,7 @@ export default function TermsPage() {
           {/* Section 4 */}
           <section className="space-y-3">
             <h2 className="text-xl font-bold text-white font-syne flex items-center gap-2">
-              <span className="text-red-500">4.</span> Acceptable Use & User Conduct
+              <span className="text-red-700">4.</span> Acceptable Use & User Conduct
             </h2>
             <p>When interacting with All YouTube Video Downloader, you agree not to:</p>
             <ul className="list-disc pl-5 space-y-1.5 text-xs text-zinc-400">
@@ -109,7 +109,7 @@ export default function TermsPage() {
           {/* Section 5 */}
           <section className="space-y-3">
             <h2 className="text-xl font-bold text-white font-syne flex items-center gap-2">
-              <span className="text-red-500">5.</span> DMCA & Copyright Compliance
+              <span className="text-red-700">5.</span> DMCA & Copyright Compliance
             </h2>
             <p>
               We honor intellectual property rights and comply with the Digital Millennium Copyright Act (DMCA). If you are a copyright owner and believe that content accessible via our platform infringes on your rights, please review our formal{' '}
@@ -123,7 +123,7 @@ export default function TermsPage() {
           {/* Section 6 */}
           <section className="space-y-3">
             <h2 className="text-xl font-bold text-white font-syne flex items-center gap-2">
-              <span className="text-red-500">6.</span> Disclaimer of Warranties & Limitation of Liability
+              <span className="text-red-700">6.</span> Disclaimer of Warranties & Limitation of Liability
             </h2>
             <p>
               THE SERVICE IS PROVIDED ON AN &quot;AS IS&quot; AND &quot;AS AVAILABLE&quot; BASIS WITHOUT WARRANTIES OF ANY KIND, EITHER EXPRESS OR IMPLIED. All YouTube Video Downloader EXPRESSLY DISCLAIMS ALL WARRANTIES, INCLUDING MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT.
@@ -136,7 +136,7 @@ export default function TermsPage() {
           {/* Section 7 */}
           <section className="space-y-3">
             <h2 className="text-xl font-bold text-white font-syne flex items-center gap-2">
-              <span className="text-red-500">7.</span> Changes to Terms
+              <span className="text-red-700">7.</span> Changes to Terms
             </h2>
             <p>
               We reserve the right to revise or update these Terms of Service at any time without prior notice. Any changes will be posted on this page with an updated revision date. Your continued use of the site signifies your agreement to the modified terms.

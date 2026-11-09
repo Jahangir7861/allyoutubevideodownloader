@@ -27,11 +27,11 @@ export default function DmcaPage() {
         {/* Header */}
         <div className="border-b border-white/10 pb-8 mb-10">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium bg-red-500/10 text-red-400 border border-red-500/20 mb-4">
-            <ShieldAlert className="w-3.5 h-3.5 text-red-500" />
+            <ShieldAlert className="w-3.5 h-3.5 text-red-700" />
             <span>Digital Millennium Copyright Act Compliance</span>
           </div>
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight font-syne mb-3">
-            DMCA <span className="text-red-500">Disclaimer</span>
+            DMCA <span className="text-red-700">Disclaimer</span>
           </h1>
           <p className="text-zinc-400 text-sm md:text-base">
             Safe Harbor Statement & Notice of Intellectual Property Rights
@@ -48,7 +48,7 @@ export default function DmcaPage() {
           {/* Section 1 */}
           <section className="space-y-3">
             <h2 className="text-xl font-bold text-white font-syne flex items-center gap-2">
-              <span className="text-red-500">1.</span> Technical Nature of the Service
+              <span className="text-red-700">1.</span> Technical Nature of the Service
             </h2>
             <p>
               All YouTube Video Downloader functions strictly as a client-side conduit and format-negotiating proxy. When a user requests a file:
@@ -67,7 +67,7 @@ export default function DmcaPage() {
           {/* Section 2 */}
           <section className="space-y-3">
             <h2 className="text-xl font-bold text-white font-syne flex items-center gap-2">
-              <span className="text-red-500">2.</span> How to File a DMCA Takedown Notice
+              <span className="text-red-700">2.</span> How to File a DMCA Takedown Notice
             </h2>
             <p>
               If you are a copyright owner or an agent thereof and believe that any link, tool, or preview on <code>allyoutubevideodownloader.com</code> infringes upon your copyright, you may submit a formal notification pursuant to 17 U.S.C. § 512(c)(3).
@@ -75,27 +75,27 @@ export default function DmcaPage() {
             <p>Your notification must include the following information in writing:</p>
             <div className="bg-white/[0.03] border border-white/10 rounded-2xl p-6 space-y-3 text-xs text-zinc-300">
               <div className="flex items-start gap-2">
-                <CheckCircle2 className="w-4 h-4 text-red-500 shrink-0 mt-0.5" />
+                <CheckCircle2 className="w-4 h-4 text-red-700 shrink-0 mt-0.5" />
                 <span>A physical or electronic signature of a person authorized to act on behalf of the owner of an exclusive right that is allegedly infringed.</span>
               </div>
               <div className="flex items-start gap-2">
-                <CheckCircle2 className="w-4 h-4 text-red-500 shrink-0 mt-0.5" />
+                <CheckCircle2 className="w-4 h-4 text-red-700 shrink-0 mt-0.5" />
                 <span>Identification of the copyrighted work claimed to have been infringed, or, if multiple works at a single site are covered, a representative list of such works.</span>
               </div>
               <div className="flex items-start gap-2">
-                <CheckCircle2 className="w-4 h-4 text-red-500 shrink-0 mt-0.5" />
+                <CheckCircle2 className="w-4 h-4 text-red-700 shrink-0 mt-0.5" />
                 <span>Identification of the material that is claimed to be infringing and information reasonably sufficient to permit us to locate the material (including specific URLs on All YouTube Video Downloader).</span>
               </div>
               <div className="flex items-start gap-2">
-                <CheckCircle2 className="w-4 h-4 text-red-500 shrink-0 mt-0.5" />
+                <CheckCircle2 className="w-4 h-4 text-red-700 shrink-0 mt-0.5" />
                 <span>Information reasonably sufficient to permit All YouTube Video Downloader to contact you, such as an address, telephone number, and email address.</span>
               </div>
               <div className="flex items-start gap-2">
-                <CheckCircle2 className="w-4 h-4 text-red-500 shrink-0 mt-0.5" />
+                <CheckCircle2 className="w-4 h-4 text-red-700 shrink-0 mt-0.5" />
                 <span>A statement that you have a good faith belief that use of the material in the manner complained of is not authorized by the copyright owner, its agent, or the law.</span>
               </div>
               <div className="flex items-start gap-2">
-                <CheckCircle2 className="w-4 h-4 text-red-500 shrink-0 mt-0.5" />
+                <CheckCircle2 className="w-4 h-4 text-red-700 shrink-0 mt-0.5" />
                 <span>A statement that the information in the notification is accurate, and under penalty of perjury, that you are authorized to act on behalf of the owner of an exclusive right that is allegedly infringed.</span>
               </div>
             </div>
@@ -104,7 +104,7 @@ export default function DmcaPage() {
           {/* Section 3 */}
           <section className="space-y-3">
             <h2 className="text-xl font-bold text-white font-syne flex items-center gap-2">
-              <span className="text-red-500">3.</span> Designated Copyright Agent
+              <span className="text-red-700">3.</span> Designated Copyright Agent
             </h2>
             <p>
               Please send all formal notifications to our Designated Agent at:
@@ -128,7 +128,7 @@ export default function DmcaPage() {
           {/* Section 4 */}
           <section className="space-y-3">
             <h2 className="text-xl font-bold text-white font-syne flex items-center gap-2">
-              <span className="text-red-500">4.</span> Counter-Notification Procedures
+              <span className="text-red-700">4.</span> Counter-Notification Procedures
             </h2>
             <p>
               If you believe that your content was removed or disabled by mistake or misidentification, you may send a counter-notification containing:

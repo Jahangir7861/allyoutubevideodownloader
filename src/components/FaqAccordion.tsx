@@ -58,8 +58,8 @@ export default function FaqAccordion({ faqs }: Props) {
                   <span>{item.q}</span>
                   <span
                     aria-hidden="true"
-                    className={`text-stone-500 text-xl leading-none shrink-0 transition-transform duration-200 ${
-                      isOpen ? 'rotate-45 text-red-500' : ''
+                    className={`text-stone-700 text-xl leading-none shrink-0 transition-transform duration-200 ${
+                      isOpen ? 'rotate-45 text-red-700' : ''
                     }`}
                   >
                     +
@@ -76,7 +76,7 @@ export default function FaqAccordion({ faqs }: Props) {
                 }`}
               >
                 <div className="border-t border-stone-100 px-5 pt-4 pb-5 bg-white">
-                  <p className="text-stone-600 text-sm leading-relaxed">{item.a}</p>
+                  <p className="text-stone-700 text-sm leading-relaxed">{item.a}</p>
                 </div>
               </div>
             </div>

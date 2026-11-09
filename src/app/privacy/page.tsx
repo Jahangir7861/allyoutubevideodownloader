@@ -27,11 +27,11 @@ export default function PrivacyPolicyPage() {
         {/* Page Header */}
         <div className="border-b border-white/10 pb-8 mb-10">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium bg-red-500/10 text-red-400 border border-red-500/20 mb-4">
-            <ShieldCheck className="w-3.5 h-3.5 text-red-500" />
+            <ShieldCheck className="w-3.5 h-3.5 text-red-700" />
             <span>Google AdSense, GDPR & CCPA Compliant</span>
           </div>
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight font-syne mb-3">
-            Privacy <span className="text-red-500">Policy</span>
+            Privacy <span className="text-red-700">Policy</span>
           </h1>
           <p className="text-zinc-400 text-sm md:text-base">
             Effective Date: September 18, 2026 | Last Updated: September 2026
@@ -49,7 +49,7 @@ export default function PrivacyPolicyPage() {
           {/* Section 1 */}
           <section className="space-y-3">
             <h2 className="text-xl font-bold text-white font-syne flex items-center gap-2">
-              <span className="text-red-500">1.</span> Information We Collect (Or Do Not Collect)
+              <span className="text-red-700">1.</span> Information We Collect (Or Do Not Collect)
             </h2>
             <p>
               When you visit All YouTube Video Downloader, you are able to use all our YouTube video downloaders, MP3 converters, thumbnail extractors, and creator analytics without any user registration. We do not ask for your name, phone number, home address, credit card numbers, or email credentials.
@@ -73,7 +73,7 @@ export default function PrivacyPolicyPage() {
           {/* Section 2 */}
           <section className="space-y-3">
             <h2 className="text-xl font-bold text-white font-syne flex items-center gap-2">
-              <span className="text-red-500">2.</span> Video URLs and Processing Data
+              <span className="text-red-700">2.</span> Video URLs and Processing Data
             </h2>
             <p>
               When you submit a YouTube URL (e.g., <code>https://youtube.com/watch?v=...</code> or <code>https://youtu.be/...</code>), our backend server receives this link purely to inspect publicly available video manifest streams (MP4 video, WebM, audio tracks, and thumbnail image URLs).
@@ -86,7 +86,7 @@ export default function PrivacyPolicyPage() {
           {/* Section 3 - Google AdSense & DART Cookies */}
           <section className="space-y-4 bg-white/[0.02] border border-white/10 rounded-2xl p-6">
             <h2 className="text-xl font-bold text-white font-syne flex items-center gap-2">
-              <span className="text-red-500">3.</span> Google AdSense & Third-Party Advertising
+              <span className="text-red-700">3.</span> Google AdSense & Third-Party Advertising
             </h2>
             <p>
               We partner with Google AdSense and third-party advertising networks to serve advertisements when you visit our website. These companies may use aggregated information (not including your name, address, email address, or telephone number) about your visits to this and other websites in order to provide advertisements about goods and services of interest to you.
@@ -121,7 +121,7 @@ export default function PrivacyPolicyPage() {
           {/* Section 4 - Log Files */}
           <section className="space-y-3">
             <h2 className="text-xl font-bold text-white font-syne flex items-center gap-2">
-              <span className="text-red-500">4.</span> Standard Log Files and Web Analytics
+              <span className="text-red-700">4.</span> Standard Log Files and Web Analytics
             </h2>
             <p>
               Like almost all web servers, All YouTube Video Downloader follows a standard procedure of using log files. These files log visitors when they visit websites. The information collected by log files includes internet protocol (IP) addresses, browser type, Internet Service Provider (ISP), date and time stamp, referring/exit pages, and possibly the number of clicks.
@@ -134,7 +134,7 @@ export default function PrivacyPolicyPage() {
           {/* Section 5 - GDPR Rights */}
           <section className="space-y-3">
             <h2 className="text-xl font-bold text-white font-syne flex items-center gap-2">
-              <span className="text-red-500">5.</span> GDPR Data Protection Rights (EEA & UK Users)
+              <span className="text-red-700">5.</span> GDPR Data Protection Rights (EEA & UK Users)
             </h2>
             <p>
               If you are a resident of the European Economic Area (EEA) or the United Kingdom, you are entitled to the full scope of data protection rights under the General Data Protection Regulation (GDPR):
@@ -156,7 +156,7 @@ export default function PrivacyPolicyPage() {
           {/* Section 6 - CCPA Rights */}
           <section className="space-y-3">
             <h2 className="text-xl font-bold text-white font-syne flex items-center gap-2">
-              <span className="text-red-500">6.</span> California Privacy Rights (CCPA / CPRA)
+              <span className="text-red-700">6.</span> California Privacy Rights (CCPA / CPRA)
             </h2>
             <p>
               Under the California Consumer Privacy Act (CCPA) and California Privacy Rights Act (CPRA), California consumers have specific rights:
@@ -171,7 +171,7 @@ export default function PrivacyPolicyPage() {
           {/* Section 7 - COPPA */}
           <section className="space-y-3">
             <h2 className="text-xl font-bold text-white font-syne flex items-center gap-2">
-              <span className="text-red-500">7.</span> Children&apos;s Online Privacy Protection Act (COPPA)
+              <span className="text-red-700">7.</span> Children&apos;s Online Privacy Protection Act (COPPA)
             </h2>
             <p>
               Another part of our priority is adding protection for children while using the internet. We encourage parents and guardians to observe, participate in, and/or monitor and guide their online activity.
@@ -184,7 +184,7 @@ export default function PrivacyPolicyPage() {
           {/* Section 8 - Cookies & Consent Management */}
           <section className="space-y-3">
             <h2 className="text-xl font-bold text-white font-syne flex items-center gap-2">
-              <span className="text-red-500">8.</span> Cookies and Browser Storage
+              <span className="text-red-700">8.</span> Cookies and Browser Storage
             </h2>
             <p>
               All YouTube Video Downloader uses browser local storage (<code>localStorage</code>) strictly to save your preferred UI language (Urdu, Spanish, Hindi, English, etc.) and your cookie consent preference choice. We do not use persistent tracking identifiers or device fingerprinting.

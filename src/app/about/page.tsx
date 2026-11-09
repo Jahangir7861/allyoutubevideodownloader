@@ -28,12 +28,12 @@ export default function AboutPage() {
         {/* Hero Section */}
         <div className="border-b border-white/10 pb-12 mb-12">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium bg-red-500/10 text-red-400 border border-red-500/20 mb-4">
-            <Sparkles className="w-3.5 h-3.5 text-red-500" />
+            <Sparkles className="w-3.5 h-3.5 text-red-700" />
             <span>Empowering Creators, Students & Editors Worldwide</span>
           </div>
 
           <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight font-syne mb-6">
-            About <span className="text-red-500">All YouTube Video Downloader</span>
+            About <span className="text-red-700">All YouTube Video Downloader</span>
           </h1>
 
           <p className="text-zinc-300 text-base sm:text-lg leading-relaxed max-w-3xl">
@@ -44,7 +44,7 @@ export default function AboutPage() {
         {/* Story & Philosophy */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
           <div className="bg-white/[0.03] border border-white/10 p-6 sm:p-8 rounded-3xl">
-            <div className="w-12 h-12 rounded-2xl bg-red-500/10 border border-red-500/20 flex items-center justify-center mb-5 text-red-500">
+            <div className="w-12 h-12 rounded-2xl bg-red-500/10 border border-red-500/20 flex items-center justify-center mb-5 text-red-700">
               <Zap className="w-6 h-6" />
             </div>
             <h2 className="text-xl font-bold font-syne text-white mb-3">Why We Built All YouTube Video Downloader</h2>
@@ -130,7 +130,7 @@ export default function AboutPage() {
               },
             ].map((feat, i) => (
               <div key={i} className="p-5 rounded-2xl bg-white/[0.02] border border-white/10 flex items-start gap-3">
-                <CheckCircle2 className="w-5 h-5 text-red-500 shrink-0 mt-0.5" />
+                <CheckCircle2 className="w-5 h-5 text-red-700 shrink-0 mt-0.5" />
                 <div>
                   <h4 className="font-semibold text-white text-sm mb-1">{feat.title}</h4>
                   <p className="text-xs text-zinc-400 leading-relaxed">{feat.desc}</p>

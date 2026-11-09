@@ -71,7 +71,7 @@ export default function ToolPageComponent({ slug }: Props) {
       <section className="bg-[#faf9f7] py-16 border-b border-stone-200">
         <div className="w-[92%] md:w-[88%] mx-auto max-w-6xl">
           <div className="text-center mb-12">
-            <p className="text-red-500 text-xs font-bold tracking-widest uppercase mb-3">{t('howItWorks')}</p>
+            <p className="text-red-700 text-xs font-bold tracking-widest uppercase mb-3">{t('howItWorks')}</p>
             <h2 className="font-bold text-2xl md:text-3xl text-stone-900 font-syne">
               {t('fromUrlToResults')}
             </h2>
@@ -80,11 +80,11 @@ export default function ToolPageComponent({ slug }: Props) {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {tool.steps.map((step, idx) => (
               <div key={idx} className="bg-white p-7 rounded-2xl border border-stone-200 shadow-sm relative hover:border-red-500/30 hover:shadow-md transition-all">
-                <div className="font-extrabold text-5xl mb-4 select-none text-stone-200 font-syne">
+                <div aria-hidden="true" className="font-extrabold text-5xl mb-4 select-none text-stone-200 font-syne">
                   0{idx + 1}
                 </div>
                 <h3 className="font-bold text-stone-900 text-base mb-2 font-syne">{step.title}</h3>
-                <p className="text-stone-500 text-sm leading-relaxed">{step.desc}</p>
+                <p className="text-stone-600 text-sm leading-relaxed">{step.desc}</p>
               </div>
             ))}
           </div>
@@ -95,7 +95,7 @@ export default function ToolPageComponent({ slug }: Props) {
       <section className="bg-white py-16 border-b border-stone-100">
         <div className="w-[92%] md:w-[88%] mx-auto max-w-6xl">
           <div className="text-center mb-12">
-            <p className="text-red-500 text-xs font-bold tracking-widest uppercase mb-3">{t('features')}</p>
+            <p className="text-red-700 text-xs font-bold tracking-widest uppercase mb-3">{t('features')}</p>
             <h2 className="font-bold text-2xl md:text-3xl text-stone-900 font-syne">{t('whatYouGet')}</h2>
           </div>
 
@@ -106,7 +106,7 @@ export default function ToolPageComponent({ slug }: Props) {
                 className="border border-stone-100 rounded-2xl p-6 bg-stone-50 hover:bg-white hover:border-stone-200 hover:shadow-md transition-all"
               >
                 <h3 className="font-bold text-stone-900 text-sm mb-2 font-syne">{feat.title}</h3>
-                <p className="text-stone-500 text-sm leading-relaxed">{feat.desc}</p>
+                <p className="text-stone-600 text-sm leading-relaxed">{feat.desc}</p>
               </div>
             ))}
           </div>
@@ -117,7 +117,7 @@ export default function ToolPageComponent({ slug }: Props) {
       <section className="bg-[#faf9f7] py-16 border-b border-stone-200">
         <div className="w-[92%] md:w-[88%] mx-auto max-w-6xl">
           <div className="text-center mb-12">
-            <p className="text-red-500 text-xs font-bold tracking-widest uppercase mb-3">{t('whoIsItFor')}</p>
+            <p className="text-red-700 text-xs font-bold tracking-widest uppercase mb-3">{t('whoIsItFor')}</p>
             <h2 className="font-bold text-2xl md:text-3xl text-stone-900 font-syne">
               {t('builtForCreators')}
             </h2>
@@ -127,7 +127,7 @@ export default function ToolPageComponent({ slug }: Props) {
             {tool.audience.map((aud, idx) => (
               <div key={idx} className="border border-stone-200 rounded-2xl p-5 bg-white shadow-sm hover:shadow-md transition-shadow">
                 <h3 className="font-bold text-stone-900 text-sm mb-2 font-syne">{aud.label}</h3>
-                <p className="text-stone-500 text-xs leading-relaxed">{aud.desc}</p>
+                <p className="text-stone-600 text-xs leading-relaxed">{aud.desc}</p>
               </div>
             ))}
           </div>
@@ -138,7 +138,7 @@ export default function ToolPageComponent({ slug }: Props) {
       <section className="bg-white py-16 border-b border-stone-100">
         <div className="w-[92%] md:w-[88%] mx-auto max-w-6xl">
           <div className="text-center mb-12">
-            <p className="text-red-500 text-xs font-bold tracking-widest uppercase mb-3">{t('useCases')}</p>
+            <p className="text-red-700 text-xs font-bold tracking-widest uppercase mb-3">{t('useCases')}</p>
             <h2 className="font-bold text-2xl md:text-3xl text-stone-900 font-syne">{t('howPeopleUse')}</h2>
           </div>
 
@@ -146,7 +146,7 @@ export default function ToolPageComponent({ slug }: Props) {
             {tool.useCases.map((uc, idx) => (
               <div key={idx} className="border border-stone-100 rounded-2xl p-6 bg-stone-50 hover:bg-white hover:border-stone-200 hover:shadow-md transition-all">
                 <h3 className="font-bold text-stone-900 text-base mb-2 font-syne">{uc.title}</h3>
-                <p className="text-stone-500 text-sm leading-relaxed">{uc.desc}</p>
+                <p className="text-stone-600 text-sm leading-relaxed">{uc.desc}</p>
               </div>
             ))}
           </div>
@@ -157,7 +157,7 @@ export default function ToolPageComponent({ slug }: Props) {
       <section className="bg-[#faf9f7] py-16 border-b border-stone-200">
         <div className="w-[92%] md:w-[88%] mx-auto max-w-6xl">
           <div className="text-center mb-12">
-            <p className="text-red-500 text-xs font-bold tracking-widest uppercase mb-3">{t('supportedFormats')}</p>
+            <p className="text-red-700 text-xs font-bold tracking-widest uppercase mb-3">{t('supportedFormats')}</p>
             <h2 className="font-bold text-2xl md:text-3xl text-stone-900 font-syne">
               {t('worksWithAny')}
             </h2>
@@ -169,7 +169,7 @@ export default function ToolPageComponent({ slug }: Props) {
                 <span className="w-2 h-2 rounded-full bg-red-500 mt-1.5 shrink-0" />
                 <div>
                   <div className="font-semibold text-stone-800 text-sm mb-0.5 font-syne">{fmt.label}</div>
-                  <div className="text-stone-500 text-xs leading-relaxed">{fmt.desc}</div>
+                  <div className="text-stone-600 text-xs leading-relaxed">{fmt.desc}</div>
                 </div>
               </div>
             ))}
@@ -181,7 +181,7 @@ export default function ToolPageComponent({ slug }: Props) {
       <section className="bg-white py-16 border-b border-stone-100">
         <div className="w-[92%] md:w-[88%] mx-auto max-w-2xl">
           <div className="text-center mb-10">
-            <p className="text-red-500 text-xs font-bold tracking-widest uppercase mb-3">{t('faq')}</p>
+            <p className="text-red-700 text-xs font-bold tracking-widest uppercase mb-3">{t('faq')}</p>
             <h2 className="font-bold text-2xl md:text-3xl text-stone-900 font-syne">
               {t('frequentlyAsked')}
             </h2>
@@ -195,7 +195,7 @@ export default function ToolPageComponent({ slug }: Props) {
       <section className="bg-[#faf9f7] py-16 border-b border-stone-200">
         <div className="w-[92%] md:w-[88%] mx-auto max-w-6xl">
           <div className="text-center mb-10">
-            <p className="text-red-500 text-xs font-bold tracking-widest uppercase mb-3">{t('relatedTools')}</p>
+            <p className="text-red-700 text-xs font-bold tracking-widest uppercase mb-3">{t('relatedTools')}</p>
             <h2 className="font-bold text-2xl md:text-3xl text-stone-900 font-syne">
               {t('otherTools')}
             </h2>
@@ -208,7 +208,7 @@ export default function ToolPageComponent({ slug }: Props) {
                 href={`/${rel.slug}`}
                 className="border border-stone-200 rounded-xl p-5 bg-white hover:border-red-500/30 hover:shadow-md transition-all group block"
               >
-                <div className="font-semibold text-stone-800 text-sm mb-1.5 group-hover:text-red-500 transition-colors font-syne">
+                <div className="font-semibold text-stone-800 text-sm mb-1.5 group-hover:text-red-700 transition-colors font-syne">
                   {rel.name}
                 </div>
                 <div className="text-stone-600 text-xs leading-relaxed">{rel.desc}</div>
@@ -224,7 +224,7 @@ export default function ToolPageComponent({ slug }: Props) {
           <h2 className="font-bold text-xl md:text-2xl text-stone-900 mb-4 font-syne">
             {tool.seoHeadline}
           </h2>
-          <p className="text-stone-500 text-sm leading-relaxed">{tool.seoBody}</p>
+          <p className="text-stone-600 text-sm leading-relaxed">{tool.seoBody}</p>
         </div>
       </section>
     </div>

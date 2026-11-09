@@ -107,25 +107,26 @@ export default function Navbar() {
             <div key={group.key} className="relative">
               <button
                 type="button"
+                id={`nav-menu-btn-${idx}`}
                 aria-expanded={openGroup === idx}
-                aria-haspopup="true"
+                aria-controls={`nav-menu-${idx}`}
                 onClick={() => {
                   setOpenGroup(openGroup === idx ? null : idx);
                   setLangDropdownOpen(false);
                 }}
                 className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
-                  openGroup === idx ? 'text-white bg-white/10' : 'text-zinc-400 hover:text-white hover:bg-white/5'
+                  openGroup === idx ? 'text-white bg-white/10' : 'text-zinc-300 hover:text-white hover:bg-white/5'
                 }`}
               >
                 <span>{t(group.key) || group.defaultLabel}</span>
-                <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${openGroup === idx ? 'rotate-180' : ''}`} />
+                <ChevronDown aria-hidden="true" className={`w-3.5 h-3.5 transition-transform duration-200 ${openGroup === idx ? 'rotate-180' : ''}`} />
               </button>
 
               {/* Dropdown Menu */}
               {openGroup === idx && (
-                <div className="absolute top-full left-0 mt-2 w-72 bg-[#141418] border border-white/10 rounded-xl shadow-2xl p-2 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
+                <div id={`nav-menu-${idx}`} className="absolute top-full left-0 mt-2 w-72 bg-[#141418] border border-white/10 rounded-xl shadow-2xl p-2 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
                   <div className="px-3 py-1.5 border-b border-white/5 flex items-center justify-between mb-1">
-                    <span className="text-[11px] font-semibold uppercase tracking-wider text-zinc-400">
+                    <span className="text-[11px] font-semibold uppercase tracking-wider text-zinc-300">
                       {t(group.key) || group.defaultLabel}
                     </span>
                     <span className={`text-[10px] px-1.5 py-0.5 rounded font-medium ${group.badge === 'Pro' ? 'bg-red-500/20 text-red-400' : 'bg-emerald-500/20 text-emerald-400'}`}>
@@ -142,7 +143,7 @@ export default function Navbar() {
                         <div className="text-sm font-medium text-zinc-200 group-hover/item:text-red-400 transition-colors">
                           {item.name}
                         </div>
-                        <div className="text-xs text-zinc-400 truncate">{item.desc}</div>
+                        <div className="text-xs text-zinc-300 truncate">{item.desc}</div>
                       </Link>
                     ))}
                   </div>
@@ -151,13 +152,13 @@ export default function Navbar() {
             </div>
           ))}
 
-          <Link href="/#pricing" className="px-3 py-2 text-sm text-zinc-400 hover:text-white hover:bg-white/5 rounded-lg transition-colors">
+          <Link href="/#pricing" className="px-3 py-2 text-sm text-zinc-300 hover:text-white hover:bg-white/5 rounded-lg transition-colors">
             {t('pricing')}
           </Link>
-          <Link href="/blog" className="px-3 py-2 text-sm text-zinc-400 hover:text-white hover:bg-white/5 rounded-lg transition-colors">
+          <Link href="/blog" className="px-3 py-2 text-sm text-zinc-300 hover:text-white hover:bg-white/5 rounded-lg transition-colors">
             {t('blog') || 'Blog'}
           </Link>
-          <Link href="/about" className="px-3 py-2 text-sm text-zinc-400 hover:text-white hover:bg-white/5 rounded-lg transition-colors">
+          <Link href="/about" className="px-3 py-2 text-sm text-zinc-300 hover:text-white hover:bg-white/5 rounded-lg transition-colors">
             {t('about') || 'About'}
           </Link>
         </div>
@@ -168,9 +169,10 @@ export default function Navbar() {
           <div className="relative">
             <button
               type="button"
+              id="lang-menu-btn"
               aria-label={`Current language: ${currentLangObj.nativeName}. Click to change language`}
               aria-expanded={langDropdownOpen}
-              aria-haspopup="true"
+              aria-controls="lang-menu-dropdown"
               onClick={() => {
                 setLangDropdownOpen(!langDropdownOpen);
                 setOpenGroup(null);
@@ -179,12 +181,12 @@ export default function Navbar() {
             >
               <span className="text-sm">{currentLangObj.flag}</span>
               <span className="font-medium">{currentLangObj.nativeName}</span>
-              <ChevronDown className={`w-3 h-3 text-zinc-400 transition-transform ${langDropdownOpen ? 'rotate-180' : ''}`} />
+              <ChevronDown aria-hidden="true" className={`w-3 h-3 text-zinc-400 transition-transform ${langDropdownOpen ? 'rotate-180' : ''}`} />
             </button>
 
             {langDropdownOpen && (
-              <div className="absolute right-0 top-full mt-2 w-48 bg-[#141418] border border-white/10 rounded-xl shadow-2xl p-1.5 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
-                <div className="px-3 py-1 text-[10px] uppercase font-bold text-zinc-400 tracking-wider">
+              <div id="lang-menu-dropdown" className="absolute right-0 top-full mt-2 w-48 bg-[#141418] border border-white/10 rounded-xl shadow-2xl p-1.5 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
+                <div className="px-3 py-1 text-[10px] uppercase font-bold text-zinc-300 tracking-wider">
                   Select Language
                 </div>
                 <div className="space-y-0.5 mt-1 max-h-64 overflow-y-auto">
@@ -203,9 +205,9 @@ export default function Navbar() {
                       <div className="flex items-center gap-2">
                         <span className="text-sm">{l.flag}</span>
                         <span>{l.nativeName}</span>
-                        <span className="text-[10px] text-zinc-400">({l.name})</span>
+                        <span className="text-[10px] text-zinc-300">({l.name})</span>
                       </div>
-                      {lang === l.code && <Check className="w-3.5 h-3.5" />}
+                      {lang === l.code && <Check aria-hidden="true" className="w-3.5 h-3.5" />}
                     </button>
                   ))}
                 </div>
@@ -224,24 +226,27 @@ export default function Navbar() {
           <button
             type="button"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden p-2 rounded-lg text-zinc-400 hover:text-white hover:bg-white/5 transition-colors"
+            className="lg:hidden p-2 rounded-lg text-zinc-300 hover:text-white hover:bg-white/5 transition-colors"
             aria-label={mobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
             aria-expanded={mobileMenuOpen}
+            aria-controls="mobile-nav-drawer"
           >
-            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            {mobileMenuOpen ? <X aria-hidden="true" className="w-6 h-6" /> : <Menu aria-hidden="true" className="w-6 h-6" />}
           </button>
         </div>
       </div>
 
       {/* Mobile Drawer Menu */}
       {mobileMenuOpen && (
-        <div className="lg:hidden bg-[#141418] border-b border-white/10 px-4 py-6 max-h-[85vh] overflow-y-auto">
+        <div id="mobile-nav-drawer" className="lg:hidden bg-[#141418] border-b border-white/10 px-4 py-6 max-h-[85vh] overflow-y-auto">
           <div className="space-y-4">
             {MENU_GROUPS.map((group, idx) => (
               <div key={group.key} className="border-b border-white/5 pb-3 last:border-0">
                 <button
                   type="button"
+                  id={`mobile-subgroup-btn-${idx}`}
                   aria-expanded={mobileSubGroup === idx}
+                  aria-controls={`mobile-subgroup-${idx}`}
                   onClick={() => setMobileSubGroup(mobileSubGroup === idx ? null : idx)}
                   className="w-full flex items-center justify-between py-2 text-left text-zinc-200 font-semibold text-sm"
                 >
@@ -251,19 +256,19 @@ export default function Navbar() {
                       {group.badge}
                     </span>
                   </div>
-                  <ChevronDown className={`w-4 h-4 text-zinc-400 transition-transform ${mobileSubGroup === idx ? 'rotate-180' : ''}`} />
+                  <ChevronDown aria-hidden="true" className={`w-4 h-4 text-zinc-400 transition-transform ${mobileSubGroup === idx ? 'rotate-180' : ''}`} />
                 </button>
 
                 {mobileSubGroup === idx && (
-                  <div className="grid grid-cols-1 gap-1 pl-3 pt-2">
+                  <div id={`mobile-subgroup-${idx}`} className="grid grid-cols-1 gap-1 pl-3 pt-2">
                     {group.tools.map((item) => (
                       <Link
                         key={item.name}
                         href={`/${item.slug}`}
-                        className="py-2 px-2 text-xs text-zinc-400 hover:text-white hover:bg-white/5 rounded-md flex flex-col"
+                        className="py-2 px-2 text-xs text-zinc-300 hover:text-white hover:bg-white/5 rounded-md flex flex-col"
                       >
                         <span className="text-zinc-200 font-medium">{item.name}</span>
-                        <span className="text-zinc-400 text-[11px]">{item.desc}</span>
+                        <span className="text-zinc-300 text-[11px]">{item.desc}</span>
                       </Link>
                     ))}
                   </div>

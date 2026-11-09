@@ -11,14 +11,14 @@ const syne = Syne({
   subsets: ['latin'],
   variable: '--font-syne',
   display: 'swap',
-  weight: ['500', '600', '700', '800'],
+  weight: ['600', '700', '800'],
 });
 
 const dmSans = DM_Sans({
   subsets: ['latin'],
   variable: '--font-dm',
   display: 'swap',
-  weight: ['400', '500', '600', '700'],
+  weight: ['400', '500', '700'],
 });
 
 export const metadata: Metadata = {
@@ -153,11 +153,13 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         {/* Google tag (gtag.js) */}
-        <script
-          async
+        <Script
+          strategy="afterInteractive"
           src="https://www.googletagmanager.com/gtag/js?id=G-N96YKLMYQY"
         />
-        <script
+        <Script
+          id="gtag-init"
+          strategy="afterInteractive"
           dangerouslySetInnerHTML={{
             __html: `
               window.dataLayer = window.dataLayer || [];
@@ -169,7 +171,7 @@ export default function RootLayout({
         />
         {/* Google AdSense script placeholder ready for publisher verification */}
         <Script
-          async
+          id="adsbygoogle-init"
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
           crossOrigin="anonymous"
           strategy="lazyOnload"

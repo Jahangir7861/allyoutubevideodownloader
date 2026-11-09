@@ -126,13 +126,13 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/blog" className="text-red-400 hover:text-red-300 text-xs font-semibold transition-colors flex items-center gap-1">
-                  <Sparkles className="w-3 h-3" />
+                <Link href="/blog" className="text-red-400 hover:text-red-300 text-xs font-semibold transition-colors flex items-center gap-1 py-1">
+                  <Sparkles aria-hidden="true" className="w-3 h-3" />
                   <span>{t('creatorBlog') || 'Creator Blog (50+ Guides)'}</span>
                 </Link>
               </li>
               <li>
-                <Link href="/admin" className="text-zinc-600 hover:text-zinc-400 text-[11px] transition-colors">
+                <Link href="/admin" className="text-zinc-400 hover:text-zinc-200 text-[11px] transition-colors py-1 inline-block">
                   Admin Dashboard
                 </Link>
               </li>
@@ -141,37 +141,37 @@ export default function Footer() {
 
           {/* AdSense Legal & Compliance */}
           <div>
-            <div className="text-zinc-400 text-xs font-semibold tracking-widest uppercase mb-3.5 font-syne">
+            <div className="text-zinc-300 text-xs font-semibold tracking-widest uppercase mb-3.5 font-syne">
               {t('legalTrust') || 'Legal & Trust'}
             </div>
             <ul className="space-y-2.5">
               <li>
-                <Link href="/about" className="text-zinc-400 hover:text-zinc-200 text-xs transition-colors flex items-center gap-1.5">
-                  <Info className="w-3 h-3 text-zinc-400" />
+                <Link href="/about" className="text-zinc-400 hover:text-zinc-200 text-xs transition-colors flex items-center gap-1.5 py-1">
+                  <Info aria-hidden="true" className="w-3 h-3 text-zinc-400" />
                   <span>{t('aboutUs') || 'About Us'}</span>
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="text-zinc-400 hover:text-zinc-200 text-xs transition-colors flex items-center gap-1.5">
-                  <Mail className="w-3 h-3 text-zinc-400" />
+                <Link href="/contact" className="text-zinc-400 hover:text-zinc-200 text-xs transition-colors flex items-center gap-1.5 py-1">
+                  <Mail aria-hidden="true" className="w-3 h-3 text-zinc-400" />
                   <span>{t('contactUs') || 'Contact Us'}</span>
                 </Link>
               </li>
               <li>
-                <Link href="/privacy" className="text-zinc-400 hover:text-zinc-200 text-xs transition-colors flex items-center gap-1.5">
-                  <Shield className="w-3 h-3 text-zinc-400" />
+                <Link href="/privacy" className="text-zinc-400 hover:text-zinc-200 text-xs transition-colors flex items-center gap-1.5 py-1">
+                  <Shield aria-hidden="true" className="w-3 h-3 text-zinc-400" />
                   <span>{t('privacyPolicy') || 'Privacy Policy'}</span>
                 </Link>
               </li>
               <li>
-                <Link href="/terms" className="text-zinc-400 hover:text-zinc-200 text-xs transition-colors flex items-center gap-1.5">
-                  <FileText className="w-3 h-3 text-zinc-400" />
+                <Link href="/terms" className="text-zinc-400 hover:text-zinc-200 text-xs transition-colors flex items-center gap-1.5 py-1">
+                  <FileText aria-hidden="true" className="w-3 h-3 text-zinc-400" />
                   <span>{t('termsOfService') || 'Terms of Service'}</span>
                 </Link>
               </li>
               <li>
-                <Link href="/dmca" className="text-zinc-400 hover:text-zinc-200 text-xs transition-colors flex items-center gap-1.5">
-                  <Scale className="w-3 h-3 text-zinc-400" />
+                <Link href="/dmca" className="text-zinc-400 hover:text-zinc-200 text-xs transition-colors flex items-center gap-1.5 py-1">
+                  <Scale aria-hidden="true" className="w-3 h-3 text-zinc-400" />
                   <span>{t('dmcaNotice') || 'DMCA Disclaimer'}</span>
                 </Link>
               </li>
@@ -183,29 +183,29 @@ export default function Footer() {
         <div className="border-t border-white/5 pt-6 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-zinc-400">
           <div className="flex flex-col sm:flex-row items-center gap-2 text-center sm:text-left">
             <span>© 2026 All YouTube Video Downloader (Allyoutubevideodownloader.com) — {t('allRightsReserved') || 'All rights reserved.'}</span>
-            <span className="hidden sm:inline text-zinc-700">•</span>
+            <span aria-hidden="true" className="hidden sm:inline text-zinc-500">•</span>
             <span className="inline-flex items-center gap-1 text-zinc-400">
               {t('designedBy') || 'Designed & Developed by'} <strong className="text-white font-semibold">Jahangir</strong>
             </span>
           </div>
 
           <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6">
-            <Link href="/about" className="hover:text-zinc-300 transition-colors">
+            <Link href="/about" className="hover:text-zinc-300 transition-colors py-1">
               {t('about') || 'About'}
             </Link>
-            <Link href="/blog" className="hover:text-red-400 transition-colors">
+            <Link href="/blog" className="hover:text-red-400 transition-colors py-1">
               {t('blog') || 'Blog'}
             </Link>
-            <Link href="/privacy" className="hover:text-zinc-300 transition-colors">
+            <Link href="/privacy" className="hover:text-zinc-300 transition-colors py-1">
               {t('privacyPolicy') || 'Privacy'}
             </Link>
-            <Link href="/terms" className="hover:text-zinc-300 transition-colors">
+            <Link href="/terms" className="hover:text-zinc-300 transition-colors py-1">
               {t('termsOfService') || 'Terms'}
             </Link>
-            <Link href="/dmca" className="hover:text-zinc-300 transition-colors">
+            <Link href="/dmca" className="hover:text-zinc-300 transition-colors py-1">
               DMCA
             </Link>
-            <Link href="/contact" className="hover:text-zinc-300 transition-colors">
+            <Link href="/contact" className="hover:text-zinc-300 transition-colors py-1">
               {t('contactUs') || 'Contact'}
             </Link>
           </div>

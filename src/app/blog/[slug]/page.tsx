@@ -186,12 +186,12 @@ export default function BlogPostPage({ params }: Props) {
 
             <div className="flex items-center gap-4 text-xs text-zinc-400">
               <span className="flex items-center gap-1.5">
-                <Calendar className="w-3.5 h-3.5 text-zinc-500" />
+                <Calendar aria-hidden="true" className="w-3.5 h-3.5 text-zinc-400" />
                 {post.date}
               </span>
-              <span>•</span>
+              <span aria-hidden="true">•</span>
               <span className="flex items-center gap-1.5">
-                <Clock className="w-3.5 h-3.5 text-zinc-500" />
+                <Clock aria-hidden="true" className="w-3.5 h-3.5 text-zinc-400" />
                 {post.readTime}
               </span>
             </div>
@@ -386,7 +386,7 @@ export default function BlogPostPage({ params }: Props) {
                 </div>
 
                 <div className="pt-4 border-t border-white/5">
-                  <div className="flex items-center gap-2 text-[11px] text-zinc-500">
+                  <div className="flex items-center gap-2 text-[11px] text-zinc-400">
                     <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
                     <span>Pure cloud streaming — zero server storage</span>
                   </div>
@@ -425,7 +425,7 @@ export default function BlogPostPage({ params }: Props) {
                   </div>
                 </div>
                 <div className="p-4">
-                  <div className="text-[10px] text-zinc-500 mb-1">{rel.readTime}</div>
+                  <div className="text-[10px] text-zinc-400 mb-1">{rel.readTime}</div>
                   <h4 className="text-xs font-bold text-white group-hover:text-red-400 transition-colors line-clamp-2 font-syne">
                     {rel.title}
                   </h4>

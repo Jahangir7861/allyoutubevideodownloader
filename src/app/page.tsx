@@ -53,14 +53,14 @@ export default function HomePage() {
           </div>
 
           {/* Headlines */}
-          <h1 className="font-extrabold text-4xl sm:text-5xl md:text-6xl leading-[1.08] tracking-tight text-white mb-5 font-syne">
+          <h1 className="font-extrabold text-2xl sm:text-3xl md:text-4xl lg:text-[42px] leading-[1.18] tracking-tight text-white mb-4 font-syne">
             {t('heroTitle1')} <br className="hidden sm:inline" />
             <span className="bg-gradient-to-r from-red-400 via-rose-300 to-red-500 bg-clip-text text-transparent">
               {t('heroTitle2')}
             </span>
           </h1>
 
-          <p className="text-zinc-400 text-base md:text-lg max-w-2xl mx-auto mb-10 leading-relaxed font-normal">
+          <p className="text-zinc-400 text-sm md:text-base max-w-2xl mx-auto mb-8 leading-relaxed font-normal">
             {t('heroSubtitle')}
           </p>
 
@@ -93,7 +93,7 @@ export default function HomePage() {
       <section className="bg-[#faf9f7] py-20 border-b border-stone-200">
         <div className="w-[92%] md:w-[88%] mx-auto max-w-6xl">
           <div className="text-center mb-14">
-            <p className="text-red-500 text-xs font-bold tracking-widest uppercase mb-3">{t('howItWorks')}</p>
+            <p className="text-red-700 text-xs font-bold tracking-widest uppercase mb-3">{t('howItWorks')}</p>
             <h2 className="font-extrabold text-3xl md:text-4xl text-stone-900 font-syne">
               {t('fromUrlToResults')}
             </h2>
@@ -101,25 +101,25 @@ export default function HomePage() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="bg-white p-8 rounded-2xl border border-stone-200 shadow-sm relative hover:border-red-500/30 hover:shadow-md transition-all">
-              <div className="font-extrabold text-5xl mb-4 select-none text-stone-200 font-syne">01</div>
+              <div aria-hidden="true" className="font-extrabold text-5xl mb-4 select-none text-stone-200 font-syne">01</div>
               <h3 className="font-bold text-stone-900 text-lg mb-2 font-syne">{t('step1Title')}</h3>
-              <p className="text-stone-500 text-sm leading-relaxed">
+              <p className="text-stone-600 text-sm leading-relaxed">
                 {t('step1Desc')}
               </p>
             </div>
 
             <div className="bg-white p-8 rounded-2xl border border-stone-200 shadow-sm relative hover:border-red-500/30 hover:shadow-md transition-all">
-              <div className="font-extrabold text-5xl mb-4 select-none text-stone-200 font-syne">02</div>
+              <div aria-hidden="true" className="font-extrabold text-5xl mb-4 select-none text-stone-200 font-syne">02</div>
               <h3 className="font-bold text-stone-900 text-lg mb-2 font-syne">{t('step2Title')}</h3>
-              <p className="text-stone-500 text-sm leading-relaxed">
+              <p className="text-stone-600 text-sm leading-relaxed">
                 {t('step2Desc')}
               </p>
             </div>
 
             <div className="bg-white p-8 rounded-2xl border border-stone-200 shadow-sm relative hover:border-red-500/30 hover:shadow-md transition-all">
-              <div className="font-extrabold text-5xl mb-4 select-none text-stone-200 font-syne">03</div>
+              <div aria-hidden="true" className="font-extrabold text-5xl mb-4 select-none text-stone-200 font-syne">03</div>
               <h3 className="font-bold text-stone-900 text-lg mb-2 font-syne">{t('step3Title')}</h3>
-              <p className="text-stone-500 text-sm leading-relaxed">
+              <p className="text-stone-600 text-sm leading-relaxed">
                 {t('step3Desc')}
               </p>
             </div>
@@ -131,7 +131,7 @@ export default function HomePage() {
       <section className="bg-white py-20 border-b border-stone-200">
         <div className="w-[92%] md:w-[88%] mx-auto max-w-6xl">
           <div className="text-center mb-14">
-            <p className="text-red-500 text-xs font-bold tracking-widest uppercase mb-3">{t('features')}</p>
+            <p className="text-red-700 text-xs font-bold tracking-widest uppercase mb-3">{t('features')}</p>
             <h2 className="font-extrabold text-3xl md:text-4xl text-stone-900 font-syne">
               {t('whatYouGet')}
             </h2>
@@ -139,61 +139,61 @@ export default function HomePage() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             <div className="border border-stone-100 rounded-2xl p-7 bg-stone-50 hover:bg-white hover:border-stone-200 hover:shadow-md transition-all">
-              <span className="text-[11px] font-bold uppercase tracking-wider text-red-500 bg-red-50 px-2.5 py-1 rounded-md mb-3 inline-block">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-red-700 bg-red-100/70 px-2.5 py-1 rounded-md mb-3 inline-block">
                 {t('feat1Tag')}
               </span>
               <h3 className="font-bold text-stone-900 text-base mb-2 font-syne">{t('feat1Title')}</h3>
-              <p className="text-stone-500 text-sm leading-relaxed">
+              <p className="text-stone-600 text-sm leading-relaxed">
                 {t('feat1Desc')}
               </p>
             </div>
 
             <div className="border border-stone-100 rounded-2xl p-7 bg-stone-50 hover:bg-white hover:border-stone-200 hover:shadow-md transition-all">
-              <span className="text-[11px] font-bold uppercase tracking-wider text-purple-600 bg-purple-50 px-2.5 py-1 rounded-md mb-3 inline-block">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-purple-700 bg-purple-100/70 px-2.5 py-1 rounded-md mb-3 inline-block">
                 {t('feat2Tag')}
               </span>
               <h3 className="font-bold text-stone-900 text-base mb-2 font-syne">{t('feat2Title')}</h3>
-              <p className="text-stone-500 text-sm leading-relaxed">
+              <p className="text-stone-600 text-sm leading-relaxed">
                 {t('feat2Desc')}
               </p>
             </div>
 
             <div className="border border-stone-100 rounded-2xl p-7 bg-stone-50 hover:bg-white hover:border-stone-200 hover:shadow-md transition-all">
-              <span className="text-[11px] font-bold uppercase tracking-wider text-blue-600 bg-blue-50 px-2.5 py-1 rounded-md mb-3 inline-block">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-blue-700 bg-blue-100/70 px-2.5 py-1 rounded-md mb-3 inline-block">
                 {t('feat3Tag')}
               </span>
               <h3 className="font-bold text-stone-900 text-base mb-2 font-syne">{t('feat3Title')}</h3>
-              <p className="text-stone-500 text-sm leading-relaxed">
+              <p className="text-stone-600 text-sm leading-relaxed">
                 {t('feat3Desc')}
               </p>
             </div>
 
             <div className="border border-stone-100 rounded-2xl p-7 bg-stone-50 hover:bg-white hover:border-stone-200 hover:shadow-md transition-all">
-              <span className="text-[11px] font-bold uppercase tracking-wider text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-md mb-3 inline-block">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-emerald-800 bg-emerald-100/70 px-2.5 py-1 rounded-md mb-3 inline-block">
                 {t('feat4Tag')}
               </span>
               <h3 className="font-bold text-stone-900 text-base mb-2 font-syne">{t('feat4Title')}</h3>
-              <p className="text-stone-500 text-sm leading-relaxed">
+              <p className="text-stone-600 text-sm leading-relaxed">
                 {t('feat4Desc')}
               </p>
             </div>
 
             <div className="border border-stone-100 rounded-2xl p-7 bg-stone-50 hover:bg-white hover:border-stone-200 hover:shadow-md transition-all">
-              <span className="text-[11px] font-bold uppercase tracking-wider text-amber-600 bg-amber-50 px-2.5 py-1 rounded-md mb-3 inline-block">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-amber-800 bg-amber-100/70 px-2.5 py-1 rounded-md mb-3 inline-block">
                 {t('feat5Tag')}
               </span>
               <h3 className="font-bold text-stone-900 text-base mb-2 font-syne">{t('feat5Title')}</h3>
-              <p className="text-stone-500 text-sm leading-relaxed">
+              <p className="text-stone-600 text-sm leading-relaxed">
                 {t('feat5Desc')}
               </p>
             </div>
 
             <div className="border border-stone-100 rounded-2xl p-7 bg-stone-50 hover:bg-white hover:border-stone-200 hover:shadow-md transition-all">
-              <span className="text-[11px] font-bold uppercase tracking-wider text-rose-600 bg-rose-50 px-2.5 py-1 rounded-md mb-3 inline-block">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-rose-700 bg-rose-100/70 px-2.5 py-1 rounded-md mb-3 inline-block">
                 {t('feat6Tag')}
               </span>
               <h3 className="font-bold text-stone-900 text-base mb-2 font-syne">{t('feat6Title')}</h3>
-              <p className="text-stone-500 text-sm leading-relaxed">
+              <p className="text-stone-600 text-sm leading-relaxed">
                 {t('feat6Desc')}
               </p>
             </div>
@@ -205,7 +205,7 @@ export default function HomePage() {
       <section id="tools" className="bg-[#faf9f7] py-20 border-b border-stone-200">
         <div className="w-[92%] md:w-[88%] mx-auto max-w-6xl">
           <div className="text-center mb-14">
-            <p className="text-red-500 text-xs font-bold tracking-widest uppercase mb-3">{t('allTools')}</p>
+            <p className="text-red-700 text-xs font-bold tracking-widest uppercase mb-3">{t('allTools')}</p>
             <h2 className="font-extrabold text-3xl md:text-4xl text-stone-900 font-syne">
               {t('allToolsSubtitle')}
             </h2>
@@ -216,8 +216,8 @@ export default function HomePage() {
             <div className="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow">
               <div>
                 <div className="flex items-center gap-2 mb-4">
-                  <div className="w-8 h-8 rounded-lg bg-red-50 flex items-center justify-center">
-                    <Video className="w-4 h-4 text-red-500" />
+                  <div className="w-8 h-8 rounded-lg bg-red-100/70 flex items-center justify-center">
+                    <Video className="w-4 h-4 text-red-700" />
                   </div>
                   <h3 className="font-bold text-stone-900 text-base font-syne">{t('downloaders')}</h3>
                 </div>
@@ -235,7 +235,7 @@ export default function HomePage() {
                     <Link
                       key={item.slug}
                       href={`/${item.slug}`}
-                      className="block p-2 rounded-lg hover:bg-stone-50 text-xs text-stone-700 hover:text-red-500 font-medium transition-colors"
+                      className="block p-2 rounded-lg hover:bg-stone-50 text-xs text-stone-700 hover:text-red-700 font-medium transition-colors"
                     >
                       {item.name} →
                     </Link>
@@ -244,7 +244,7 @@ export default function HomePage() {
               </div>
               <Link
                 href="/youtube-video-downloader"
-                className="mt-6 text-xs font-bold text-red-500 hover:text-red-600 flex items-center gap-1 pt-3 border-t border-stone-100"
+                className="mt-6 text-xs font-bold text-red-700 hover:text-red-800 flex items-center gap-1 pt-3 border-t border-stone-100"
               >
                 <span>{t('browseDownloaders') || 'Browse Downloaders'}</span>
                 <ArrowRight className="w-3.5 h-3.5" />
@@ -255,8 +255,8 @@ export default function HomePage() {
             <div className="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow">
               <div>
                 <div className="flex items-center gap-2 mb-4">
-                  <div className="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center">
-                    <Search className="w-4 h-4 text-emerald-600" />
+                  <div className="w-8 h-8 rounded-lg bg-emerald-100/70 flex items-center justify-center">
+                    <Search className="w-4 h-4 text-emerald-700" />
                   </div>
                   <h3 className="font-bold text-stone-900 text-base font-syne">{t('seoMetadata')}</h3>
                 </div>
@@ -271,7 +271,7 @@ export default function HomePage() {
                     <Link
                       key={item.slug}
                       href={`/${item.slug}`}
-                      className="block p-2 rounded-lg hover:bg-stone-50 text-xs text-stone-700 hover:text-emerald-600 font-medium transition-colors"
+                      className="block p-2 rounded-lg hover:bg-stone-50 text-xs text-stone-700 hover:text-emerald-700 font-medium transition-colors"
                     >
                       {item.name} →
                     </Link>
@@ -280,7 +280,7 @@ export default function HomePage() {
               </div>
               <Link
                 href="/youtube-tag-extractor"
-                className="mt-6 text-xs font-bold text-emerald-600 hover:text-emerald-700 flex items-center gap-1 pt-3 border-t border-stone-100"
+                className="mt-6 text-xs font-bold text-emerald-700 hover:text-emerald-800 flex items-center gap-1 pt-3 border-t border-stone-100"
               >
                 <span>{t('exploreSeo') || 'Explore SEO Tools'}</span>
                 <ArrowRight className="w-3.5 h-3.5" />
@@ -291,8 +291,8 @@ export default function HomePage() {
             <div className="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow">
               <div>
                 <div className="flex items-center gap-2 mb-4">
-                  <div className="w-8 h-8 rounded-lg bg-purple-50 flex items-center justify-center">
-                    <Sparkles className="w-4 h-4 text-purple-600" />
+                  <div className="w-8 h-8 rounded-lg bg-purple-100/70 flex items-center justify-center">
+                    <Sparkles className="w-4 h-4 text-purple-700" />
                   </div>
                   <h3 className="font-bold text-stone-900 text-base font-syne">{t('aiContent')}</h3>
                 </div>
@@ -307,7 +307,7 @@ export default function HomePage() {
                     <Link
                       key={item.slug}
                       href={item.slug === 'blog' ? '/blog' : `/${item.slug}`}
-                      className="block p-2 rounded-lg hover:bg-stone-50 text-xs text-stone-700 hover:text-purple-600 font-medium transition-colors"
+                      className="block p-2 rounded-lg hover:bg-stone-50 text-xs text-stone-700 hover:text-purple-700 font-medium transition-colors"
                     >
                       {item.name} →
                     </Link>
@@ -316,7 +316,7 @@ export default function HomePage() {
               </div>
               <Link
                 href="/youtube-script-generator"
-                className="mt-6 text-xs font-bold text-purple-600 hover:text-purple-700 flex items-center gap-1 pt-3 border-t border-stone-100"
+                className="mt-6 text-xs font-bold text-purple-700 hover:text-purple-800 flex items-center gap-1 pt-3 border-t border-stone-100"
               >
                 <span>{t('tryAiScripts') || 'Try AI Scripts'}</span>
                 <ArrowRight className="w-3.5 h-3.5" />
@@ -327,8 +327,8 @@ export default function HomePage() {
             <div className="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow">
               <div>
                 <div className="flex items-center gap-2 mb-4">
-                  <div className="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center">
-                    <BarChart3 className="w-4 h-4 text-blue-600" />
+                  <div className="w-8 h-8 rounded-lg bg-blue-100/70 flex items-center justify-center">
+                    <BarChart3 className="w-4 h-4 text-blue-700" />
                   </div>
                   <h3 className="font-bold text-stone-900 text-base font-syne">{t('analytics')}</h3>
                 </div>
@@ -343,7 +343,7 @@ export default function HomePage() {
                     <Link
                       key={item.slug}
                       href={`/${item.slug}`}
-                      className="block p-2 rounded-lg hover:bg-stone-50 text-xs text-stone-700 hover:text-blue-600 font-medium transition-colors"
+                      className="block p-2 rounded-lg hover:bg-stone-50 text-xs text-stone-700 hover:text-blue-700 font-medium transition-colors"
                     >
                       {item.name} →
                     </Link>
@@ -352,7 +352,7 @@ export default function HomePage() {
               </div>
               <Link
                 href="/youtube-monetization-checker"
-                className="mt-6 text-xs font-bold text-blue-600 hover:text-blue-700 flex items-center gap-1 pt-3 border-t border-stone-100"
+                className="mt-6 text-xs font-bold text-blue-700 hover:text-blue-800 flex items-center gap-1 pt-3 border-t border-stone-100"
               >
                 <span>{t('checkAnalytics') || 'Check Channel Analytics'}</span>
                 <ArrowRight className="w-3.5 h-3.5" />
@@ -366,7 +366,7 @@ export default function HomePage() {
       <section className="bg-white py-20 border-b border-stone-200">
         <div className="w-[92%] md:w-[88%] mx-auto max-w-6xl">
           <div className="text-center mb-14">
-            <p className="text-red-500 text-xs font-bold tracking-widest uppercase mb-3">{t('testimonials')}</p>
+            <p className="text-red-700 text-xs font-bold tracking-widest uppercase mb-3">{t('testimonials')}</p>
             <h2 className="font-extrabold text-3xl md:text-4xl text-stone-900 font-syne">
               {t('creatorsLove')}
             </h2>
@@ -379,7 +379,7 @@ export default function HomePage() {
               </p>
               <div>
                 <div className="font-bold text-stone-900 text-sm font-syne">{t('test1Author')}</div>
-                <div className="text-xs text-stone-500">{t('test1Role')}</div>
+                <div className="text-xs text-stone-600 font-medium">{t('test1Role')}</div>
               </div>
             </div>
 
@@ -389,7 +389,7 @@ export default function HomePage() {
               </p>
               <div>
                 <div className="font-bold text-stone-900 text-sm font-syne">{t('test2Author')}</div>
-                <div className="text-xs text-stone-500">{t('test2Role')}</div>
+                <div className="text-xs text-stone-600 font-medium">{t('test2Role')}</div>
               </div>
             </div>
 
@@ -399,7 +399,7 @@ export default function HomePage() {
               </p>
               <div>
                 <div className="font-bold text-stone-900 text-sm font-syne">{t('test3Author')}</div>
-                <div className="text-xs text-stone-500">{t('test3Role')}</div>
+                <div className="text-xs text-stone-600 font-medium">{t('test3Role')}</div>
               </div>
             </div>
           </div>
@@ -410,11 +410,11 @@ export default function HomePage() {
       <section id="pricing" className="bg-[#faf9f7] py-20 border-b border-stone-200">
         <div className="w-[92%] md:w-[88%] mx-auto max-w-5xl">
           <div className="text-center mb-14">
-            <p className="text-red-500 text-xs font-bold tracking-widest uppercase mb-3">{t('pricing')}</p>
+            <p className="text-red-700 text-xs font-bold tracking-widest uppercase mb-3">{t('pricing')}</p>
             <h2 className="font-extrabold text-3xl md:text-4xl text-stone-900 font-syne mb-2">
               {t('pricingTitle')}
             </h2>
-            <p className="text-stone-500 text-sm">{t('pricingSubtitle')}</p>
+            <p className="text-stone-600 text-sm">{t('pricingSubtitle')}</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -423,7 +423,7 @@ export default function HomePage() {
               <div>
                 <div className="flex items-center justify-between mb-4">
                   <h3 className="font-bold text-stone-900 text-lg font-syne">{t('freePlan')}</h3>
-                  <span className="text-[11px] font-semibold bg-stone-100 text-stone-600 px-2.5 py-1 rounded-full">
+                  <span className="text-[11px] font-semibold bg-stone-100 text-stone-700 px-2.5 py-1 rounded-full">
                     {t('noSignup')}
                   </span>
                 </div>
@@ -453,7 +453,7 @@ export default function HomePage() {
                   <h3 className="font-bold text-white text-lg font-syne">{t('proPlan')}</h3>
                 </div>
                 <div className="text-4xl font-extrabold text-white font-syne mb-6">
-                  $9 <span className="text-sm font-normal text-zinc-400">/mo</span>
+                  $9 <span className="text-sm font-normal text-zinc-300">/mo</span>
                 </div>
                 <ul className="space-y-3 text-xs text-zinc-300 mb-8">
                   <li className="flex items-center gap-2 text-red-400 font-semibold">{t('proTier1')}</li>
@@ -477,12 +477,12 @@ export default function HomePage() {
               <div>
                 <div className="flex items-center justify-between mb-4">
                   <h3 className="font-bold text-stone-900 text-lg font-syne">{t('agencyPlan')}</h3>
-                  <span className="text-[11px] font-semibold bg-stone-100 text-stone-600 px-2.5 py-1 rounded-full">
+                  <span className="text-[11px] font-semibold bg-stone-100 text-stone-700 px-2.5 py-1 rounded-full">
                     Advanced
                   </span>
                 </div>
                 <div className="text-4xl font-extrabold text-stone-900 font-syne mb-1">
-                  $49 <span className="text-sm font-normal text-stone-500">/mo</span>
+                  $49 <span className="text-sm font-normal text-stone-600">/mo</span>
                 </div>
                 <p className="text-stone-600 text-[11px] mb-6">{t('agencySub')}</p>
                 <ul className="space-y-3 text-xs text-stone-600 mb-8">
@@ -509,11 +509,11 @@ export default function HomePage() {
       <section className="bg-white py-20 border-b border-stone-200">
         <div className="w-[92%] md:w-[88%] mx-auto max-w-3xl">
           <div className="text-center mb-12">
-            <p className="text-red-500 text-xs font-bold tracking-widest uppercase mb-3">{t('faq')}</p>
+            <p className="text-red-700 text-xs font-bold tracking-widest uppercase mb-3">{t('faq')}</p>
             <h2 className="font-extrabold text-3xl md:text-4xl text-stone-900 font-syne mb-2">
               {t('frequentlyAsked')}
             </h2>
-            <p className="text-stone-500 text-sm">{t('faqSub')}</p>
+            <p className="text-stone-600 text-sm">{t('faqSub')}</p>
           </div>
 
           <FaqAccordion faqs={homeFaqs} />
